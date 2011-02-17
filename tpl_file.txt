@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+ <title>Sudoku Solver</title>
+ <style>
+  body{
+   bgcolor: white;
+   color: black;
+  }
+  
+  table{
+   margin-top: 50px;
+   margin-bottom: 50px;
+   spacing: 0em;
+   table-layout: fixed;
+   border-collapse: collapse;
+   borer-spacing: 0px;
+  }
+  
+  td{
+   border: thin solid black;
+   font-size: large;
+   width: 2em;
+   height: 2em;
+   padding: 0px;
+   margin: 0px;
+   font-weight: bold;
+   text-align: center;
+  }
+  
+  .topborder{ border-top-width: medium; }
+  .bottomborder{ border-bottom-width: medium; }
+  .leftborder{ border-left-width: medium; }
+  .rightborder{ border-right-width: medium; }
+  
+  .riddle{ color: black; }
+  .user{ color: silver; }
+  .solution{ color: lime; }
+  .incorrect{ color: red; }
+  .invalid{ bg-color: maroon; color: black; }
+  
+ </style>
+</head>
+<body>
+
+<table align="center">
+
+%ROWS%
+
+</table>
+
+</body>
+</html>
