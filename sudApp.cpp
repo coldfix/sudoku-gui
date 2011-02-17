@@ -114,6 +114,9 @@ bool sudApp::OnInit()
 #if wxUSE_GIF
 	wxImage::AddHandler(new wxGIFHandler);
 #endif
+
+	SetAppName( wxT("wxSudoku") );
+
 	sudFrame* mainWindow = new sudFrame( NULL, sudFrame::ID_SUDOKUSOLVERFRAME );
 	if(argc==2)
 		mainWindow->LoadFile(argv[1]);

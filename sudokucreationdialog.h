@@ -33,13 +33,15 @@
 ////@begin forward declarations
 ////@end forward declarations
 
+class sudRadioDeliverer;
+
 /*!
  * Control identifiers
  */
 
 ////@begin control identifiers
 #define SYMBOL_SUDOKUCREATIONDIALOG_STYLE wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX
-#define SYMBOL_SUDOKUCREATIONDIALOG_TITLE _("Sudoku Solver")
+#define SYMBOL_SUDOKUCREATIONDIALOG_TITLE _("wxSudoku")
 #define SYMBOL_SUDOKUCREATIONDIALOG_IDNAME ID_SUDOKUCREATIONDIALOG
 #define SYMBOL_SUDOKUCREATIONDIALOG_SIZE wxSize(399, 299)
 #define SYMBOL_SUDOKUCREATIONDIALOG_POSITION wxDefaultPosition
@@ -127,6 +129,8 @@ public:
     /// Should we show tooltips?
     static bool ShowToolTips();
 
+	sudRadioDeliverer* m_customdeliverer;
+
 ////@begin SudokuCreationDialog member variables
     wxRadioButton* m_radio_dim_cust;
     wxCheckBox* m_check_generate;
@@ -153,44 +157,24 @@ public:
 
 
 
-#include<gwx/gwxValidators.h>
+#include<gwx/Validators.h>
 
-class sudRadioValidator : public gwxIndexedRadioButtonValidator<wxSize,int>{
-
-//	DECLARE_DYNAMIC_CLASS(sudRadioValidator)
-//	DECLARE_EVENT_TABLE()
-
+class sudRadioDeliverer : public gwxIndexCheckDeliverer<wxSize>{
 public:
-
-	///
-
-    // Constructors
-	sudRadioValidator() { }
-
-    // Constructors
-	sudRadioValidator(ValueType *selectval,const ValueType&persval,
+	sudRadioDeliverer(ValueType *selectval,const ValueType&persval,
 					IndexType *selectidx,const IndexType&persidx)
-					: gwxIndexedRadioButtonValidator(selectval,persval,selectidx,persidx)
+		: gwxIndexCheckDeliverer(selectval,persval,selectidx,persidx)
 	{
 	}
 
-	sudRadioValidator(const sudRadioValidator& val)
-		: gwxIndexedRadioButtonValidator(val)
+	sudRadioDeliverer(const sudRadioDeliverer& val)
+		: gwxIndexCheckDeliverer(val)
 	{
 	}
 
-    // Destructor
-    ~sudRadioValidator() { }
+    ~sudRadioDeliverer() { }
 
-    // Make a clone of this validator
-    virtual wxObject *Clone() const { return new sudRadioValidator(*this); }
-
-    // Copies val to this object
-	bool Copy(const sudRadioValidator& val){
-		return gwxIndexedRadioButtonValidator::Copy(val); }
-
-    // Called to transfer data to the window
-    virtual bool TransferToWindow();
+    bool DeliverTo(wxWindow*);
 };
 
 

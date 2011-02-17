@@ -25,7 +25,7 @@
 ////@begin includes
 #include "wx/grid.h"
 ////@end includes
-#include "sudSudoku.h"
+#include "Sudoku.h"
 #include "sudEditor.h"
 
 /*!
@@ -35,7 +35,6 @@
 ////@begin forward declarations
 class sudGrid;
 ////@end forward declarations
-class sudSudoku;
 class sudGridTable;
 class sudGridCellEditor;
 class sudEditor;
@@ -67,6 +66,9 @@ public:
     sudGrid();
     sudGrid(wxWindow* parent, wxWindowID id = ID_GRID, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0);
 
+	void setdisplaysize(int size);
+	int getdisplaysize() const { return m_displaysize; }
+
     /// Creation
     bool Create(wxWindow* parent, wxWindowID id = ID_GRID, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0);
 
@@ -89,7 +91,7 @@ public:
 
 	/// sudoku
 	void NewGrid(int nbx=0,int nby=0);
-    void InitFromSudoku(const sudSudoku&);
+    void InitFromSudoku(const Sudoku&);
 
 	bool SetCellVal(int x,int y, int val);
 	int GetCellVal(int x,int y) ;
@@ -102,7 +104,7 @@ public:
 
 	sudEditor* GetEditor()				{ return m_editor; }
 	const sudEditor* GetEditor() const	{ return m_editor; }
-	const sudDynSize* GetSudokuSize() const;
+	const sudSize* GetSudokuSize() const;
 
 ////@begin sudGrid member function declarations
 
@@ -124,6 +126,7 @@ public:
 ////@end sudGrid member variables
 
 	sudEditor* m_editor;
+	int m_displaysize;
 };
 
 
@@ -198,8 +201,8 @@ public:
 
 
     // these are pure virtual in wxGridTableBase
-	int GetNumberRows()										{ return GetSize()->gethigh(); }
-    int GetNumberCols()										{ return GetSize()->gethigh(); }
+	int GetNumberRows()										{ return GetSize()->high(); }
+    int GetNumberCols()										{ return GetSize()->high(); }
 	wxString GetValue( int row, int col );
 	void SetValue( int row, int col, const wxString& s );
 	bool IsEmptyCell( int row, int col )					{ return GetValueAsLong(row,col)==0; }

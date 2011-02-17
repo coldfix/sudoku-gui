@@ -1,7 +1,7 @@
-#include "wx/msw/wx.rc"
+//#include <wx/msw/wx.rc>
 
 
-#include<windows.h>
+#include <windows.h>
 #include "resource.h"
 
 // German (Germany) resources

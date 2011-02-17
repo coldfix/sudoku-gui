@@ -45,7 +45,7 @@ class SudokuCreationDialog;
 
 ////@begin control identifiers
 #define SYMBOL_SUDFRAME_STYLE wxCAPTION|wxRESIZE_BORDER|wxSYSTEM_MENU|wxMINIMIZE_BOX|wxMAXIMIZE_BOX|wxCLOSE_BOX
-#define SYMBOL_SUDFRAME_TITLE _("Sudoku Solver")
+#define SYMBOL_SUDFRAME_TITLE _("wxSudoku")
 #define SYMBOL_SUDFRAME_IDNAME ID_SUDOKUSOLVERFRAME
 #define SYMBOL_SUDFRAME_SIZE wxDefaultSize
 #define SYMBOL_SUDFRAME_POSITION wxDefaultPosition
@@ -77,6 +77,9 @@ public:
     /// Creates the controls and sizers
     void CreateControls();
 
+
+	void OnMenuitemViewSizeClick( wxCommandEvent& event );
+
 ////@begin sudFrame event handler declarations
 
     /// wxEVT_COMMAND_MENU_SELECTED event handler for wxID_NEW
@@ -90,6 +93,15 @@ public:
 
     /// wxEVT_COMMAND_MENU_SELECTED event handler for wxID_EXIT
     void OnExitClick( wxCommandEvent& event );
+
+    /// wxEVT_UPDATE_UI event handler for ID_MENUITEM_VIEW_SMALL
+    void OnMenuitemViewSmallUpdate( wxUpdateUIEvent& event );
+
+    /// wxEVT_UPDATE_UI event handler for ID_MENUITEM_VIEW_NORMAL
+    void OnMenuitemViewNormalUpdate( wxUpdateUIEvent& event );
+
+    /// wxEVT_UPDATE_UI event handler for ID_MENUITEM_VIEW_BIG
+    void OnMenuitemViewBigUpdate( wxUpdateUIEvent& event );
 
     /// wxEVT_COMMAND_MENU_SELECTED event handler for wxID_ABOUT
     void OnAboutClick( wxCommandEvent& event );
@@ -151,12 +163,17 @@ public:
     /// Control identifiers
     enum {
         ID_SUDOKUSOLVERFRAME = 10000,
+        ID_MENUITEM_VIEW_SMALL = 10030,
+        ID_MENUITEM_VIEW_NORMAL = 10031,
+        ID_MENUITEM_VIEW_BIG = 10032,
         ID_SOLVER_SHOW_SOLUTION = 10002,
         ID_SOLVER_GENERATE = 10005,
         ID_SOLVER_ENTER_SUDOKU = 10009,
         ID_STATUSBAR1 = 10006
     };
 ////@end sudFrame member variables
+	bool m_generated;
+	int m_gentime,m_reducetime;
 };
 
 #endif

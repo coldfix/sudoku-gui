@@ -1,3 +1,6 @@
+#include <wx/wxprec.h>
+
+
 #include "debug.h"
 
 #ifdef USE_COUNT
@@ -12,11 +15,7 @@ BEGIN_EVENT_TABLE( DebugView, wxFrame )
 END_EVENT_TABLE()
 
 
-DEBUG_IMP_COUNT(sudSudoku);
-DEBUG_IMP_COUNT(sudSolveImpl);
-
-
-DebugView::DebugView( int& refcount, wxString name ) : count(refcount){
+DebugView::DebugView( int& refcount, const wxString& name ) : count(refcount){
 	Create(0,wxID_ANY,name,wxPoint(0,0));
 	wxBoxSizer* outersizer = new wxBoxSizer(wxHORIZONTAL);
 	SetSizer(outersizer);

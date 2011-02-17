@@ -1,5 +1,5 @@
 #pragma once
-#include "sudSudoku.h"
+#include "Sudoku.h"
 #include "sudSolve.h"
 
 class sudSolve;
@@ -17,15 +17,14 @@ public:
 	sudEditor(int nbx,int nby);
 	~sudEditor();
 
-	sudSolve* GetSolver() const						{ return m_solver; }
-	const sudSolveBase::MyValView& GetPossibilities(int x,int y) const;
+	const sudSolve& GetSolver() const				{ return m_solver; }
 
-	const sudSudoku* GetRiddle() const				{ return &m_riddle; }
-	const sudSudoku* GetUser() const				{ return &m_user; }
-	const sudSudoku* GetSolution() const			{ return &m_solution; }
-	const sudDynSize* GetSize() const				{ return GetRiddle(); }
+	const Sudoku* GetRiddle() const				{ return &m_riddle; }
+	const Sudoku* GetUser() const				{ return &m_user; }
+	const Sudoku* GetSolution() const			{ return &m_solution; }
+	const sudSize* GetSize() const					{ return GetRiddle(); }
 
-	void ClearSudoku()								{ SetSize( GetSize()->b_x(), GetSize()->b_y() ); }
+	void ClearSudoku()								{ SetSize( GetSize()->bx(), GetSize()->by() ); }
 
 	int GetRiddle(int x,int y) const				{ return GetRiddle()->get(x,y); }
 	int GetUser(int x,int y) const					{ return GetUser()->get(x,y); }
@@ -37,7 +36,7 @@ public:
 	bool GetShowSolution() const					{ return m_showsolution; }
 
 	virtual bool SetSize(int nbx,int nby);
-	virtual bool SetRiddle(const sudSudoku&sriddl);
+	virtual bool SetRiddle(const Sudoku&sriddl);
 
 	virtual int GetUnsolved() const;
 
@@ -59,8 +58,8 @@ protected:
 	virtual void RefreshProcAll();
 	virtual void RefreshProcCell(int x,int y);
 
-	sudSolve* m_solver;
+	sudSolve m_solver;
 	bool m_initmode,m_showsolution;
 	int m_refreshlev;
-	sudSudoku m_riddle,m_user,m_solution;
+	Sudoku m_riddle,m_user,m_solution;
 };

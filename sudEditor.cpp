@@ -1,3 +1,6 @@
+#include <wx/wxprec.h>
+
+
 #include "sudEditor.h"
 #include "sudSolve.h"
 
@@ -8,20 +11,15 @@
 */
 
 sudEditor::sudEditor(int nbx,int nby)
-	:m_riddle(nbx,nby),m_user(nbx,nby),m_solution(nbx,nby),
-	m_refreshlev(4),m_showsolution(0)
+	: m_refreshlev(15),m_showsolution(0)
 {
-	m_solver = new sudSolve( GetRiddle() );
 	SetSize(nbx,nby);
 }
 
 sudEditor::~sudEditor()
 {
-	delete m_solver;
 }
 
-const sudSolveBase::MyValView& sudEditor::GetPossibilities(int x,int y) const{
-	return GetSolver()->getpossibilities( GetSize()->acrd_xy(x,y) ); }
 
 int sudEditor::GetCellMode(int x,int y) const{
 	int mode;
@@ -30,9 +28,11 @@ int sudEditor::GetCellMode(int x,int y) const{
 			mode = cellmode_user_incorrect;
 		else
 			mode = cellmode_user_correct;
-	}else if(GetShowSolution() && !GetRiddle(x,y) && GetSolution(x,y))
+	}else if(GetShowSolution() && !GetRiddle(x,y) && GetSolution(x,y)){
 		mode = cellmode_solution;
-	else if( GetRiddle(x,y) || IsInitMode() ){
+		if(IsFalseInput(x,y))
+			mode |= cellmode_invalid;	/* only when isinitmode, because we do not enter usermode if riddle is not ok */
+	}else if( GetRiddle(x,y) || IsInitMode() ){
 		mode = cellmode_riddle;
 		if(IsFalseInput(x,y))
 			mode |= cellmode_invalid;	/* only when isinitmode, because we do not enter usermode if riddle is not ok */
@@ -44,41 +44,41 @@ void sudEditor::SetShowSolution(bool on){
 	m_showsolution = on; }
 
 bool sudEditor::IsFalseInput(int x,int y,int val) const{
-//	return m_riddle.possible(x,y,val);	// simple testing.. avoids a lot of processing
-	if(! GetSolver()->isok() || !val )
+	if(! GetSolver().ok() || !val )
 		return false;
 	if( !GetRiddle(x,y) )
-		return GetPossibilities(x,y).find(val)==GetPossibilities(x,y).end();
+		return ! m_solver.possible(x,y,val);
 	if( val==m_riddle.get(x,y) )
 		return false;
 	valtype ov = GetRiddle(x,y);
-	sudSudoku sud = m_riddle;
+	Sudoku sud = m_riddle;
 	sud.set(x,y,val);
-	sudSolve tmpsolve(&m_riddle);
-	tmpsolve.test(GetRefreshLevels());
-	return ! tmpsolve.isok();
+	sudSolve tmpsolve;
+	tmpsolve.init(m_riddle);
+	tmpsolve.solve(GetRefreshLevels());
+	return ! tmpsolve.ok();
 }
 
 bool sudEditor::IsFalseInput(int x,int y) const{
 	if(GetUser(x,y))
-		return GetPossibilities(x,y).find(GetUser(x,y))==GetPossibilities(x,y).end();
+		return !m_solver.possible(x,y,GetUser(x,y));
 	if(GetRiddle(x,y))
-		return GetPossibilities(x,y).find(GetRiddle(x,y))==GetPossibilities(x,y).end();
-	return ! GetPossibilities(x,y).size(); }
+		return !m_solver.possible(x,y,GetRiddle(x,y));
+	return !m_solver.ok(x,y); }
 
 bool sudEditor::EnterInitMode(bool on){
 	if(on){
 		m_initmode = true;
 		m_user.clear();		// todo: merge the user input with the riddle sudoku if possible
 		return true; }
-	if( !GetSolver()->isok() || !GetSolver()->isunique() || GetSolver()->toohard() )
+	if( !GetSolver().ok() || !GetSolver().unique() || GetSolver().toohard() )
 		return false;
 	m_initmode = false;
 	return true; }
 
-bool sudEditor::SetRiddle(const sudSudoku&rid){
-	SetSize(rid.b_x(),rid.b_y());
-	m_riddle.init(rid);
+bool sudEditor::SetRiddle(const Sudoku&rid){
+	SetSize(rid.bx(),rid.by());
+	m_riddle = rid;
 	RefreshProcAll();
 	return true; }
 
@@ -87,14 +87,14 @@ bool sudEditor::SetSize(int nbx, int nby){
 	if(!nbx||!nby)
 		return false;
 
-	m_riddle.setsize(nbx,nby);
-	m_user.setsize(nbx,nby);
-	m_solution.setsize(nbx,nby);
+		m_riddle.setsize(nbx,nby);
+		m_user.setsize(nbx,nby);
+		m_solution.setsize(nbx,nby);
+		m_solver.setsize(nbx,nby);
+		m_solver.solve(0);
+
 	m_initmode = true;
 	m_showsolution = false;
-
-	m_solver->refresh(0);
-	m_initmode = true;
 	return true; }
 
 
@@ -119,12 +119,13 @@ int sudEditor::GetCell(int x, int y) const{
 	return GetRiddle(x,y) ?GetRiddle(x,y) : (GetShowSolution()&&GetSolution(x,y) ?GetSolution(x,y):GetUser(x,y)); }
 
 int sudEditor::GetUnsolved() const{
-	return GetRiddle()->getunsolved() + GetUser()->getunsolved() - GetRiddle()->getfieldnum(); }
+	return GetRiddle()->getunsolved() + GetUser()->getunsolved() - GetRiddle()->size(); }
 
 
 void sudEditor::RefreshProcAll(){
-	m_solver->refresh(GetRefreshLevels());
-	m_solution.init( m_solver->getsolution() );
+	m_solver.init(m_riddle);
+	m_solver.solve(GetRefreshLevels());
+	m_solution = m_solver.sudoku();
 }
 
 void sudEditor::RefreshProcCell(int x,int y){
