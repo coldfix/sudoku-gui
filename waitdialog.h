@@ -54,17 +54,17 @@ class sudGen;
 
 class sudWaitDialog: public wxDialog
 {    
-    DECLARE_CLASS( sudWaitDialog )
+    DECLARE_CLASS(sudWaitDialog)
     DECLARE_EVENT_TABLE()
 
 	sudGen* m_generator;
 public:
     /// Constructors
-    sudWaitDialog( sudGen* );
-    sudWaitDialog( sudGen*, wxWindow* parent, wxWindowID id = SYMBOL_SUDWAITDIALOG_IDNAME, const wxString& caption = SYMBOL_SUDWAITDIALOG_TITLE, const wxPoint& pos = SYMBOL_SUDWAITDIALOG_POSITION, const wxSize& size = SYMBOL_SUDWAITDIALOG_SIZE, long style = SYMBOL_SUDWAITDIALOG_STYLE );
+    sudWaitDialog(sudGen*);
+    sudWaitDialog(sudGen*, wxWindow* parent, wxWindowID id = SYMBOL_SUDWAITDIALOG_IDNAME, const wxString& caption = SYMBOL_SUDWAITDIALOG_TITLE, const wxPoint& pos = SYMBOL_SUDWAITDIALOG_POSITION, const wxSize& size = SYMBOL_SUDWAITDIALOG_SIZE, long style = SYMBOL_SUDWAITDIALOG_STYLE);
 
     /// Creation
-    bool Create( wxWindow* parent, wxWindowID id = SYMBOL_SUDWAITDIALOG_IDNAME, const wxString& caption = SYMBOL_SUDWAITDIALOG_TITLE, const wxPoint& pos = SYMBOL_SUDWAITDIALOG_POSITION, const wxSize& size = SYMBOL_SUDWAITDIALOG_SIZE, long style = SYMBOL_SUDWAITDIALOG_STYLE );
+    bool Create(wxWindow* parent, wxWindowID id = SYMBOL_SUDWAITDIALOG_IDNAME, const wxString& caption = SYMBOL_SUDWAITDIALOG_TITLE, const wxPoint& pos = SYMBOL_SUDWAITDIALOG_POSITION, const wxSize& size = SYMBOL_SUDWAITDIALOG_SIZE, long style = SYMBOL_SUDWAITDIALOG_STYLE);
 
     /// Destructor
     ~sudWaitDialog();
@@ -82,6 +82,9 @@ public:
 
     /// wxEVT_COMMAND_BUTTON_CLICKED event handler for ID_BUTTON_RESTART
     void OnButtonRestartClick( wxCommandEvent& event );
+
+    /// wxEVT_COMMAND_BUTTON_CLICKED event handler for wxID_STOP
+    void OnStopClick( wxCommandEvent& event );
 
     /// wxEVT_COMMAND_BUTTON_CLICKED event handler for wxID_CANCEL
     void OnCancelClick( wxCommandEvent& event );

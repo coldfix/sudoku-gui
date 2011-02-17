@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
-	Name="wxSudoku 2.2"
+	Version="9,00"
+	Name="wxSudoku 2.3"
 	ProjectGUID="{7B23287C-FCFB-4C16-9AB4-27B010A30E3C}"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -18,6 +19,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
+			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -40,7 +42,7 @@
 				AdditionalIncludeDirectories="&quot;$(WXWIN)\lib\vc_lib\mswd&quot;;&quot;$(WXWIN)\include&quot;"
 				PreprocessorDefinitions="WIN32;__WXMSW__;_WINDOWS;_DEBUG;__WXDEBUG__"
 				MinimalRebuild="false"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="wx/wxprec.h"
 				DebugInformationFormat="3"
@@ -60,7 +62,10 @@
 				AdditionalDependencies="wxbase28d.lib wxbase28d_net.lib wxbase28d_odbc.lib wxbase28d_xml.lib wxexpatd.lib wxjpegd.lib wxmsw28d_adv.lib wxmsw28d_aui.lib wxmsw28d_core.lib wxmsw28d_dbgrid.lib wxmsw28d_gl.lib wxmsw28d_html.lib wxmsw28d_media.lib wxmsw28d_qa.lib wxmsw28d_richtext.lib wxmsw28d_xrc.lib wxpngd.lib wxregexd.lib wxtiffd.lib wxzlibd.lib winmm.lib comctl32.lib rpcrt4.lib wsock32.lib user32.lib kernel32.lib shell32.lib Advapi32.lib Ole32.lib Gdi32.lib Comdlg32.lib oleaut32.lib gwx.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;"
+				IgnoreDefaultLibraryNames="MSVCRT"
 				GenerateDebugInformation="true"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -81,9 +86,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -92,6 +94,8 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
+			CharacterSet="2"
+			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -112,18 +116,19 @@
 				Name="VCCLCompilerTool"
 				Optimization="3"
 				EnableIntrinsicFunctions="false"
-				FavorSizeOrSpeed="0"
-				WholeProgramOptimization="false"
+				FavorSizeOrSpeed="1"
+				WholeProgramOptimization="true"
 				AdditionalIncludeDirectories="&quot;$(WXWIN)\lib\vc_lib\mswd&quot;;&quot;$(WXWIN)\include&quot;;&quot;D:\coding\c++ projects\common\include&quot;"
 				PreprocessorDefinitions="WIN32;__WXMSW__;_WINDOWS"
 				StringPooling="true"
 				ExceptionHandling="1"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				BufferSecurityCheck="true"
+				RuntimeTypeInfo="false"
 				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="wx/wxprec.h"
 				CallingConvention="0"
-				ForcedIncludeFiles=" "
+				ForcedIncludeFiles=""
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -137,9 +142,18 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="wxbase28.lib wxbase28_net.lib wxbase28_odbc.lib wxbase28_xml.lib wxexpat.lib wxjpeg.lib wxmsw28_adv.lib wxmsw28_aui.lib wxmsw28_core.lib wxmsw28_dbgrid.lib wxmsw28_gl.lib wxmsw28_html.lib wxmsw28_media.lib wxmsw28_qa.lib wxmsw28_richtext.lib wxmsw28_xrc.lib wxpng.lib wxregex.lib wxtiff.lib wxzlib.lib winmm.lib comctl32.lib rpcrt4.lib wsock32.lib user32.lib kernel32.lib shell32.lib Advapi32.lib Ole32.lib Gdi32.lib Comdlg32.lib oleaut32.lib gwx.lib"
-				OutputFile="$(OutDir)\wxSudoku 2.2.exe"
+				OutputFile="$(OutDir)\wxSudoku 2.3.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;"
+				GenerateManifest="false"
+				IgnoreAllDefaultLibraries="false"
+				IgnoreDefaultLibraryNames="MSVCRT"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				LinkTimeCodeGeneration="1"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -160,9 +174,6 @@
 				Name="VCAppVerifierTool"
 			/>
 			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -176,6 +187,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\mSudoku.h"
+				>
+			</File>
+			<File
 				RelativePath=".\sudGen.cpp"
 				>
 			</File>
@@ -185,6 +200,14 @@
 			</File>
 			<File
 				RelativePath=".\Sudoku.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SudokuSave.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SudokuSave.h"
 				>
 			</File>
 			<File
@@ -203,10 +226,6 @@
 			>
 			<File
 				RelativePath=".\about.h"
-				>
-			</File>
-			<File
-				RelativePath=".\description.txt"
 				>
 			</File>
 			<File
@@ -237,6 +256,34 @@
 				RelativePath=".\sudoku solver.rc"
 				>
 			</File>
+			<Filter
+				Name="raw"
+				>
+				<File
+					RelativePath=".\description.txt"
+					>
+				</File>
+				<File
+					RelativePath=".\tpl_cell.txt"
+					>
+				</File>
+				<File
+					RelativePath=".\tpl_file_entry.txt"
+					>
+				</File>
+				<File
+					RelativePath=".\tpl_file_footer.txt"
+					>
+				</File>
+				<File
+					RelativePath=".\tpl_file_header.txt"
+					>
+				</File>
+				<File
+					RelativePath=".\tpl_row.txt"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="UI"
@@ -263,6 +310,14 @@
 			</File>
 			<File
 				RelativePath=".\sudFrame.h"
+				>
+			</File>
+			<File
+				RelativePath=".\sudgendata.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\sudgendata.h"
 				>
 			</File>
 			<File
@@ -309,18 +364,6 @@
 						PrecompiledHeaderThrough="wx/wxprec.h"
 					/>
 				</FileConfiguration>
-			</File>
-		</Filter>
-		<Filter
-			Name="Debug Util"
-			>
-			<File
-				RelativePath=".\debug.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\debug.h"
-				>
 			</File>
 		</Filter>
 	</Files>

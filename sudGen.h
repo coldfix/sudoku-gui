@@ -11,41 +11,49 @@ public:
 	static void Init();
 	static void UnInit();
 
+	sudGen(const Sudoku& riddle);
+	sudGen(int nbx = 3, int nby = 3);
+
 	void cancel(){
 		m_state = stateAborting;
 		m_task = taskAbort; }
+
+	void stop(){
+		m_state = stateStopping;
+		m_task = taskStop; }
 
 	void restart(){
 		m_state = stateAborting;
 		m_task = taskContinue; }
 
-	bool aborting() const { return m_state==stateAborting; }
-	bool finished() const { return m_state==stateIdle; }
-	bool working() const { return m_state==stateGenerating || m_state==stateReducing; }
+	bool stopping() const { return m_state == stateStopping; }
+	bool aborting() const { return m_state == stateAborting; }
+	bool finished() const { return m_state == stateIdle; }
+	bool working() const { return m_state == stateGenerating || m_state == stateReducing; }
 
-	bool generatefull(int nbx,int nby);
+	void setdim(int nbx, int nby);
+	void setriddle(const Sudoku&);
 
-	bool reduce(const Sudoku&, int minspots, int maxspots, int maxlevels, int difficulty);
+	bool fill();
+	bool reduce(int minspots, int maxspots, int maxlevels, int difficulty);
 
-	bool generate(int nbx,int nby,int minspots,int maxspots,int maxlevels,int difficulty);
-	bool generate(int nbx,int nby,int difficulty);
+	bool generate(int minspots,int maxspots,int maxlevels,int difficulty);
+	bool generate(int difficulty);
 
-	const Sudoku& GetFull() const { return m_full; }
-	const Sudoku& GetRiddle() const { return m_riddle; }
+	const Sudoku& GetSudoku() const { return m_sudoku; }
 
-	int gentime();
-	int reducetime();
-	int totaltime();
+	int gentime() const { return m_gentime; }
+	int reducetime() const { return m_redtime; }
+	int totaltime() const { return gentime() + reducetime(); }
 
 protected:
-	Sudoku m_full,m_riddle;
+	Sudoku m_sudoku;
 
-	wxDateTime started,generated,reduced;
-	int m_task, m_state;
+	int m_task, m_state, m_gentime, m_redtime;
 
 	enum{
-		stateIdle, stateGenerating, stateReducing, stateAborting,
-		taskContinue, taskAbort
+		stateIdle, stateGenerating, stateReducing, stateAborting, stateStopping,
+		taskContinue, taskAbort, taskStop
 	};
 };
 

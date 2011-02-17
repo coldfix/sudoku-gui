@@ -33,24 +33,12 @@
 ////@end XPM images
 
 
-//	avoid load of unneeded resource-intensive handlers
-
-#undef wxUSE_LIBPNG
-#undef wxUSE_LIBJPEG
-#undef wxUSE_GIF
-#undef wxUSE_XPM				/* why isnt this needed? */
-#define wxUSE_LIBPNG	0
-#define wxUSE_LIBJPEG	0
-#define wxUSE_GIF		0
-#define wxUSE_XPM		0
-
-
 /*!
  * Application instance implementation
  */
 
 ////@begin implement app
-IMPLEMENT_APP( sudApp )
+IMPLEMENT_APP(sudApp)
 ////@end implement app
 
 
@@ -58,14 +46,14 @@ IMPLEMENT_APP( sudApp )
  * sudApp type definition
  */
 
-IMPLEMENT_CLASS( sudApp, wxApp )
+IMPLEMENT_CLASS(sudApp, wxApp)
 
 
 /*!
  * sudApp event table definition
  */
 
-BEGIN_EVENT_TABLE( sudApp, wxApp )
+BEGIN_EVENT_TABLE(sudApp, wxApp)
 
 ////@begin sudApp event table entries
 ////@end sudApp event table entries
@@ -98,33 +86,17 @@ void sudApp::Init()
  */
 
 bool sudApp::OnInit()
-{    
-	// Remove the comment markers above and below this block
-	// to make permanent changes to the code.
+{
+	SetAppName(wxT("wxSudoku"));
 
-#if wxUSE_XPM
-	wxImage::AddHandler(new wxXPMHandler);
-#endif
-#if wxUSE_LIBPNG
-	wxImage::AddHandler(new wxPNGHandler);
-#endif
-#if wxUSE_LIBJPEG
-	wxImage::AddHandler(new wxJPEGHandler);
-#endif
-#if wxUSE_GIF
-	wxImage::AddHandler(new wxGIFHandler);
-#endif
-
-	SetAppName( wxT("wxSudoku") );
-
-	sudFrame* mainWindow = new sudFrame( NULL, sudFrame::ID_SUDOKUSOLVERFRAME );
-	if(argc==2)
+	sudFrame* mainWindow = new sudFrame(NULL, sudFrame::ID_SUDOKUSOLVERFRAME);
+	if (argc == 2)
 		mainWindow->LoadFile(argv[1]);
 	else
 		mainWindow->sudGenerate();
 	mainWindow->Show(true);
 
-    return true;
+	return true;
 }
 
 

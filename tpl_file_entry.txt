@@ -1,0 +1,17 @@
+
+
+<!--
+<sudoku>
+ <app name="wxSudoku" version="2.3" author="Thomas Glaessle">
+ <content>
+%SAVE%
+ </content>
+</sudoku>
+-->
+
+<table align="center">
+
+%ROWS%
+
+</table>
+

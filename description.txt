@@ -46,10 +46,10 @@ If you spot any bugs or see room for improvement, please contact me.
 
 Binary:
 	> Windows 2000 / XP / NT
-	> with .NET Framework 2.0
 
 The application has been devoloped using
 	> Microsoft Visual C++ 2005 Express Edition
 	> Anthemon's DialogBlocks 4.18 Personal Edition
 	> wxWidgets 2.8.4
+	> STLport 5.1.5
 

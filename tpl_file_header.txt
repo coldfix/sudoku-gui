@@ -7,7 +7,7 @@
    bgcolor: white;
    color: black;
   }
-  
+
   table{
    margin-top: 15px;
    margin-bottom: 15px;
@@ -16,7 +16,7 @@
    border-collapse: collapse;
    border-spacing: 0px;
   }
-  
+
   td{
    border: 1px solid black;
    font-family: "Comic Sans Ms", sans-serif;
@@ -28,27 +28,18 @@
    margin: 0px;
    text-align: center;
   }
-  
-  .topborder{ border-top-width: 2px; }
-  .bottomborder{ border-bottom-width: 2px; }
-  .leftborder{ border-left-width: 2px; }
-  .rightborder{ border-right-width: 2px; }
-  
-  .riddle{ color: black; }
-  .user{ color: silver; }
+
+  .tb{ border-top-width: 2px; }
+  .bb{ border-bottom-width: 2px; }
+  .lb{ border-left-width: 2px; }
+  .rb{ border-right-width: 2px; }
+
+  .r{ color: black; }
+  .u{ color: silver; }
   .solution{ color: lime; }
   .incorrect{ color: red; }
-  .invalid{ bg-color: maroon; color: black; }
-  
+  .inv{ bg-color: maroon; color: black; }
+
  </style>
 </head>
 <body>
-
-<table align="center">
-
-%ROWS%
-
-</table>
-
-</body>
-</html>

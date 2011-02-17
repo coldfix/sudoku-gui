@@ -2,6 +2,10 @@
 #define __SUDOKU_H__INCLUDED__
 
 
+typedef unsigned char valtype;
+
+
+
 /*
 	class sudSize
 		> represents the dimensions of a sudoku
@@ -18,20 +22,21 @@ public:
 	virtual ~sudSize() {}
 
 protected:
-	void init(int _nbx,int _nby){
+	void init(int _nbx, int _nby)
+	{
 		nbx = _nbx;
 		nby = _nby;
 		row = nbx * nby;
-		total = row * row; }
+		total = row * row;
+	}
 public:
 
 	/// size
 
-	void setsize(const sudSize&size){
-		setsize(size.bx(), size.by()); }
-
-	virtual void setsize(int bx,int by){
-		init(bx,by); }
+	virtual void setsize(int bx, int by)
+	{
+		init(bx,by);
+	}
 
 	int bx() const					{ return nbx; }
 	int by() const					{ return nby; }
@@ -40,58 +45,55 @@ public:
 	int high() const				{ return row; }
 	int size() const				{ return total; }
 
-	bool initialized() const		{ return bx()&&by(); }
+	bool initialized() const		{ return bx() && by(); }
 
 	int maxval() const				{ return row; }
 	int minval() const				{ return 1; }
 
-	bool operator ==(const sudSize& ds) const{
-		return bx()==ds.bx() && by()==ds.by(); }
+	bool operator  == (const sudSize& ds) const{
+		return bx() == ds.bx() && by() == ds.by(); }
 
 
 	/// coord transformations
 
-	int a_xy(int x,int y) const		{ return x*high() + y; }
-	int a_bf(int b,int f) const		{ return a_xy( x_bf(b,f), y_bf(b,f) ); }
+	int a_xy(int x,int y) const		{ return x * high() + y; }
+	int a_bf(int b,int f) const		{ return a_xy(x_bf(b,f), y_bf(b,f)); }
 
-	int x_a(int a) const			{ return a/high(); }
-	int y_a(int a) const			{ return a%high(); }
-	int b_a(int a) const			{ return b_hl(xb_a(a),yb_a(a)); }
-	int f_a(int a) const			{ return f_hl(xf_a(a),yf_a(a)); }
+	int x_a(int a) const			{ return a / high(); }
+	int y_a(int a) const			{ return a % high(); }
+	int b_a(int a) const			{ return b_hl(xb_a(a), yb_a(a)); }
+	int f_a(int a) const			{ return f_hl(xf_a(a), yf_a(a)); }
 
-	int x_bf(int b,int f) const		{ return x_hl(xb_b(b),xf_f(f)); }
-	int y_bf(int b,int f) const		{ return y_hl(yb_b(b),yf_f(f)); }
-	int b_xy(int x,int y) const		{ return b_hl(xb_x(x),yb_y(y)); }
-	int f_xy(int x,int y) const		{ return f_hl(xf_x(x),yf_y(y)); }
+	int x_bf(int b,int f) const		{ return x_hl(xb_b(b), xf_f(f)); }
+	int y_bf(int b,int f) const		{ return y_hl(yb_b(b), yf_f(f)); }
+	int b_xy(int x,int y) const		{ return b_hl(xb_x(x), yb_y(y)); }
+	int f_xy(int x,int y) const		{ return f_hl(xf_x(x), yf_y(y)); }
 
-	int x_hl(int h,int l) const		{ return h*fx() + l; }
-	int y_hl(int h,int l) const		{ return h*fy() + l; }
-	int b_hl(int h,int l) const		{ return h*by() + l; }
-	int f_hl(int h,int l) const		{ return h*fy() + l; }
+	int x_hl(int h,int l) const		{ return h * fx() + l; }
+	int y_hl(int h,int l) const		{ return h * fy() + l; }
+	int b_hl(int h,int l) const		{ return h * by() + l; }
+	int f_hl(int h,int l) const		{ return h * fy() + l; }
 
-	int xb_x(int x) const			{ return x/fx(); }
-	int xf_x(int x) const			{ return x%fx(); }
-	int yb_y(int y) const			{ return y/fy(); }
-	int yf_y(int y) const			{ return y%fy(); }
+	int xb_x(int x) const			{ return x / fx(); }
+	int xf_x(int x) const			{ return x % fx(); }
+	int yb_y(int y) const			{ return y / fy(); }
+	int yf_y(int y) const			{ return y % fy(); }
 
-	int xb_b(int b) const			{ return b/by(); }
-	int xf_f(int f) const			{ return f/fy(); }
-	int yb_b(int b) const			{ return b%by(); }
-	int yf_f(int f) const			{ return f%fy(); }
+	int xb_b(int b) const			{ return b / by(); }
+	int xf_f(int f) const			{ return f / fy(); }
+	int yb_b(int b) const			{ return b % by(); }
+	int yf_f(int f) const			{ return f % fy(); }
 
 	int xb_a(int a) const			{ return xb_x(x_a(a)); }
 	int xf_a(int a) const			{ return xf_x(x_a(a)); }
 	int yb_a(int a) const			{ return yb_y(y_a(a)); }
 	int yf_a(int a) const			{ return yf_y(y_a(a)); }
 
-
-	typedef int (*const sudSize::u_a)(int a) ;
-	typedef int (*const sudSize::a_uv)(int a) ;
 protected:
 
 	/// members
 
-	int nbx,nby,row,total;
+	int nbx, nby, row, total;
 };
 
 
@@ -104,140 +106,190 @@ protected:
 	we dont provide a statSudoku class because the sudoku class isn't used in performance-sensitive context
 */
 
-template<class T>
-class SudokuT : public sudSize{
+class Sudoku : public sudSize{
 public:
 
 	/// construction & destruction
 
-	SudokuT()
+	Sudoku()
 	{
-		setsize(0,0);
+		m_data = 0;
+		m_unsolved = 0;
 	}
 
-	SudokuT(int _nbx,int _nby,const T*data=0)
+	Sudoku(int _nbx, int _nby,
+		   const valtype* data = 0)
 	{
-		clear(_nbx,_nby,data);
+		m_data = 0;
+		init(_nbx, _nby, data);
 	}
 
-	SudokuT(const SudokuT&sd)
+	Sudoku(const Sudoku& sd)
+		: sudSize(sd)
 	{
-		*this = sd;
+		ref(sd.m_data);
+		m_unsolved = sd.m_unsolved;
 	}
 
-	~SudokuT(void){
-		if(initialized())
-			delete [] m_data;
+	~Sudoku(void)
+	{
+		free(m_data);
 	}
 
 
 	/// (re-)initialization
 
-	void clear(){
-		if(initialized())
-			for(int a=0;a<size();a++)
-				m_data[a] = 0;
-		m_unsolved = size(); }
-
-	void clear(int _nbx,int _nby, const T* data=0){
-		bool realloc = _nbx*_nby != high();
-		if(initialized() && realloc)
-			delete [] m_data;
-		sudSize::setsize(_nbx,_nby);
-		if(initialized()&&realloc)
-			m_data = new T[size()];
-		if(initialized()&&data){
-			m_unsolved = size();
-			for(int a=0; a<size(); a++)
-				if(m_data[a] = data[a])
-					--m_unsolved;
-		}else
-			clear();
+	virtual void clear()
+	{
+		init(bx(), by());
 	}
 
-	void setsize(int _nbx,int _nby){
-		clear(_nbx,_nby); }
+protected:
+	void init(int _nbx, int _nby,
+			   const valtype* data = 0)
+	{
+		int h = high();
+		sudSize::setsize(_nbx, _nby);
 
-	void setsize(const sudSize& size){
-		setsize(size.bx(),size.by()); }
+		if (_nbx * _nby != h || shared())
+			unshare(false);
 
-	SudokuT& operator=(const SudokuT& sudoku){
-		clear(sudoku.nbx, sudoku.nby, sudoku.m_data);
-		return *this; }
+		if (data)
+		{
+			m_unsolved = size();
+			for (int a = 0; a < size(); a++)
+				if (m_data[a] = data[a])
+					--m_unsolved;
+		}
+		else
+		{
+			for (int a = 0; a < size(); a++)
+				m_data[a] = 0;
+			m_unsolved = size();
+		}
+	}
+
+	bool shared() const { return m_data && m_data[-1] != 0; }
+	void unshare(bool copy = true)
+	{
+		valtype* old = m_data;
+		m_data = alloc(size());
+
+		if (copy && m_data && old)
+		{
+			for (int i = 0; i < size(); i++)
+				m_data[i] = old[i];
+		}
+		free(old);
+	}
+
+	static valtype* alloc(int size)
+	{
+		if (size == 0)
+			return 0;
+		valtype *data = 1 + new valtype[size + 1];
+		data [-1] = 0;
+		return data;
+	}
+	static void free(valtype * data)
+	{
+		if (data && data[-1]-- == 0)
+			delete [] (data - 1);
+		data = 0;
+	}
+	void ref(valtype * data)
+	{
+		m_data = data;
+		++m_data[-1];
+	}
+public:
+
+	void setsize(int _nbx, int _nby)
+	{
+		init(_nbx, _nby);
+	}
+
+	Sudoku& operator = (const Sudoku& sudoku)
+	{
+		free(m_data);
+		sudSize::operator = (sudoku);
+		ref(sudoku.m_data);
+		m_unsolved = sudoku.m_unsolved;
+		return *this;
+	}
 
 
 	/// test
 
-	int getunsolved() const								{ return m_unsolved; }
-	int getsolved() const								{ return size()-getunsolved(); }
+	int getunsolved() const { return m_unsolved; }
+	int getsolved() const { return size() - getunsolved(); }
+	bool empty() const { return getsolved() == 0; }
+	bool filled() const { return getunsolved() == 0; }
+	bool solved() const { return filled() && valid(); }
 
-
-	bool equals(const SudokuT& sud) const{
-		if(bx()!=sud.bx() || by()!=sud.by())
+	bool equals(const Sudoku& sud) const{
+		if (bx() != sud.bx() || by() != sud.by())
 			return false;
-		for(int a=0;a<size();a++)
-			if( get(a) != sud.get(a) )
+		for (int a = 0; a < size(); a++)
+			if (get(a) != sud.get(a))
 				return false;
 		return true; }
 
-	bool operator==(const SudokuT&sud) const{
+	bool operator == (const Sudoku&sud) const{
 		return equals(sud); }
+
+	bool valid() const
+	{
+		for (int a = 0; a < size(); a++)
+		{
+			int x = x_a(a), y = y_a(a),
+				b = b_a(a), f = f_a(a),
+				v = get(a);
+			if (!v)
+				continue;
+			for (int xi = x + 1; xi < high(); xi++)
+				if (get(a_xy(xi, y)) == v)
+					return false;
+			for (int yi = y + 1; yi < high(); yi++)
+				if (get(a_xy(x, yi)) == v)
+					return false;
+			for (int fi = f + 1; fi < high(); fi++)
+				if (get(a_bf(b, fi)) == v)
+					return false;
+		}
+		return true;
+	}
 
 
 	/// coord-access
 
-	const T& get(int a) const{
+	valtype get(int a) const{
 		return m_data[a]; }
 
-	const T& get(int x,int y) const{
+	valtype get(int x,int y) const{
 		return get(a_xy(x,y)); }
 
-	const T& operator [](int a) const{
+	valtype operator [] (int a) const{
 		return get(a); }
 
 
-	void set(int a, const T& num){
-		if(num && !m_data[a])
+	void set(int a, valtype num)
+	{
+		if (shared())
+			unshare();
+		if (num && !m_data[a])
 			--m_unsolved;
-		else if(!num&&m_data[a])
+		else if (!num&&m_data[a])
 			++m_unsolved;
-		m_data[a] = num; }
+		m_data[a] = num;
+	}
 
-	void set(int x, int y, const T& num){
-		set(a_xy(x,y),num); }
+	void set(int x, int y, valtype num) {
+		set(a_xy(x,y), num); }
 
-
-	template<class stream>
-	stream& save( stream& str ) const{
-		str << bx() << wxT(" ") << by() << wxT("\n");
-		for( int y=0; y< high(); y++ ){
-			if(y)
-				str << (y%fy() ? wxT("\n") : wxT("\n\n"));
-			for( int x=0; x< high(); x++ ){
-				if(x)
-					str << (x%fx() ? wxT(" ") : wxT("  "));
-				str << get(x,y);
-			}
-		}
-		return str; }
-
-	template< class stream >
-	stream& load( stream& str ){
-		int xcol, ycol;
-		str >> xcol >> ycol;
-		setsize(xcol,ycol);
-		for( int y=0; y<high(); y++ ){
-			for(int x=0;x<high(); x++){
-				int cur;
-				str >> cur;
-				set(x,y, cur);
-			}
-		}
-		return str; }
-
-protected:
+private:
 	/// members
-	T* m_data;
+	valtype* m_data;
 	int m_unsolved;
 };
 
@@ -248,9 +300,6 @@ protected:
 
 */
 
-
-typedef unsigned char valtype;
-typedef SudokuT<valtype> Sudoku;
 
 
 

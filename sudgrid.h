@@ -45,7 +45,7 @@ class sudEditor;
  */
 
 ////@begin control identifiers
-#define SYMBOL_SUDGRID_STYLE 0
+#define SYMBOL_SUDGRID_STYLE wxSUNKEN_BORDER
 #define SYMBOL_SUDGRID_IDNAME ID_GRID
 #define SYMBOL_SUDGRID_SIZE wxDefaultSize
 #define SYMBOL_SUDGRID_POSITION wxDefaultPosition
@@ -58,7 +58,7 @@ class sudEditor;
 
 class sudGrid: public wxGrid
 {    
-    DECLARE_DYNAMIC_CLASS( sudGrid )
+    DECLARE_DYNAMIC_CLASS(sudGrid)
     DECLARE_EVENT_TABLE()
 
 public:
@@ -91,7 +91,7 @@ public:
 
 	/// sudoku
 	void NewGrid(int nbx=0,int nby=0);
-    void InitFromSudoku(const Sudoku&);
+    void SetSudoku(const Sudoku&);
 
 	bool SetCellVal(int x,int y, int val);
 	int GetCellVal(int x,int y) ;
@@ -140,7 +140,7 @@ class sudGridCellEditor : public wxGridCellTextEditor
 public:
     // allows to specify the range - if min == max == -1, no range checking is
     // done
-    sudGridCellEditor( );
+    sudGridCellEditor(wxGrid*);
 
     void Create(wxWindow* parent,
                         wxWindowID id,
@@ -157,7 +157,7 @@ public:
     void SetParameters(const wxString& params);
 
     wxGridCellEditor *Clone() const
-        { return new sudGridCellEditor( ); }
+        { return new sudGridCellEditor(m_grid); }
 
     // added GetValue so we can get the value which is in the control
     wxString GetValue() const;
@@ -170,6 +170,7 @@ protected:
 
 private:
     long m_valueOld;
+	wxGrid* m_grid;
 
     DECLARE_NO_COPY_CLASS(sudGridCellEditor)
 };
@@ -180,67 +181,81 @@ private:
 */
 
 
-class sudGridTable : public wxGridTableBase, public sudEditor
+class sudGridTable
+	: public wxGridTableBase,
+	  public sudEditor
 {
+    DECLARE_CLASS(sudGridTable)
 public:
-    sudGridTable( int _nbx, int _nby );
+
+    sudGridTable(int _nbx, int _nby);
     ~sudGridTable();
 
-	// internal:
-
-	void NotifyUpdateSize();
-	void NotifyUpdateCell(int row,int col);
 
 	// sudEditor
 
-	bool SetSize(int nbx,int nby);
-	bool EnterInitMode(bool on);
+	bool SetSize(int nbx, int nby);
 	bool SetCell(int x, int y, int val);
-	void SetShowSolution(bool on);
-	void RefreshProcAll();
+	void Refresh();
 
 
     // these are pure virtual in wxGridTableBase
-	int GetNumberRows()										{ return GetSize()->high(); }
-    int GetNumberCols()										{ return GetSize()->high(); }
-	wxString GetValue( int row, int col );
-	void SetValue( int row, int col, const wxString& s );
-	bool IsEmptyCell( int row, int col )					{ return GetValueAsLong(row,col)==0; }
+
+	int GetNumberRows()								{ return GetSize().high(); }
+    int GetNumberCols()								{ return GetSize().high(); }
+	bool IsEmptyCell(int row, int col)				{ return GetValueAsLong(row,col) == 0; }
+
+	wxString GetValue(int row, int col);
+	void SetValue(int row, int col, const wxString& s);
+
+
 
     // Data type determination and value access
-    wxString GetTypeName( int row, int col );
-	bool CanGetValueAs( int row, int col, const wxString& typeName )	{return typeName == wxGRID_VALUE_NUMBER || typeName==wxGRID_VALUE_STRING;}
-	bool CanSetValueAs( int row, int col, const wxString& typeName )	{return typeName == wxGRID_VALUE_NUMBER || typeName==wxGRID_VALUE_STRING;}
 
-	long GetValueAsLong( int row, int col )					{ return GetCell(col,row); }
-	void SetValueAsLong( int row, int col, long value )		{ SetCell(col,row,value); }
+	wxString GetTypeName(int row, int col)	{ return wxGRID_VALUE_STRING; }
 
+	bool CanGetValueAs(int row, int col, const wxString& typeName) {
+		return typeName == wxGRID_VALUE_NUMBER || typeName == wxGRID_VALUE_STRING; }
 
-	void Clear()											{ ClearSudoku(); }
+	bool CanSetValueAs(int row, int col, const wxString& typeName){
+		return typeName == wxGRID_VALUE_NUMBER || typeName == wxGRID_VALUE_STRING; }
 
-	//
-    virtual wxGridCellAttr *GetAttr( int row, int col, wxGridCellAttr::wxAttrKind  kind );
+	long GetValueAsLong(int row, int col)				{ return GetCell(col, row); }
+	void SetValueAsLong(int row, int col, long value)	{ SetCell(col, row, value); }
 
-
-
-// atm we dont support changing the sudoku size by inserting/appending/deleting rows/cols
-//	set the sudoku size directly instead
-	bool InsertRows( size_t pos = 0, size_t numRows = 1 )	{ return false; }
-    bool AppendRows( size_t numRows = 1 )					{ return false; }
-    bool DeleteRows( size_t pos = 0, size_t numRows = 1 )	{ return false; }
-    bool InsertCols( size_t pos = 0, size_t numCols = 1 )	{ return false; }
-    bool AppendCols( size_t numCols = 1 )					{ return false; }
-    bool DeleteCols( size_t pos = 0, size_t numCols = 1 )	{ return false; }
+	void Clear()										{ ClearSudoku(); }
 
 
     // Does this table allow attributes?  creates a sudGridCellAttrProvider if necessary.
-	bool CanHaveAttributes()								{ return GetAttrProvider(); }
+
+	bool CanHaveAttributes()							{ return GetAttrProvider(); }
 
 	wxGridCellAttr* GetModeAttr(int mode);
-private:
-	wxGridCellAttr *m_attrInitial,*m_attrSolved,*m_attrFalseInput,*m_attrUser,*m_attrInvalid;
 
-    DECLARE_CLASS( sudGridTable )
+    virtual wxGridCellAttr *GetAttr(int row, int col, wxGridCellAttr::wxAttrKind  kind);
+
+
+
+	// atm size changes via insert/append/delete rows/cols is not supported
+	// instead you must set the size directly
+
+	bool InsertRows(size_t pos = 0, size_t numRows = 1)	{ return false; }
+    bool AppendRows(size_t numRows = 1)					{ return false; }
+    bool DeleteRows(size_t pos = 0, size_t numRows = 1)	{ return false; }
+    bool InsertCols(size_t pos = 0, size_t numCols = 1)	{ return false; }
+    bool AppendCols(size_t numCols = 1)					{ return false; }
+    bool DeleteCols(size_t pos = 0, size_t numCols = 1)	{ return false; }
+
+
+private:
+	void NotifyUpdateSize();
+	void NotifyUpdateCell(int row, int col);
+
+	wxGridCellAttr *m_attrInitial,
+					*m_attrSolved,
+					*m_attrFalseInput,
+					*m_attrUser,
+					*m_attrInvalid;
 };
 
 

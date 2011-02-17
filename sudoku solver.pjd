@@ -472,9 +472,12 @@
           <string name="id-suffix">""</string>
           <long name="use-xrc">0</long>
           <long name="working-mode">0</long>
-          <string name="variable-0">"m_current_directory|wxString|CurrentDirectory||0|0"</string>
-          <string name="variable-1">"m_current_file|wxString|CurrentFile||0|0"</string>
-          <string name="variable-2">"m_difficulty|int|Difficulty|sudGen::difficulty_medium|0|0|"</string>
+          <string name="variable-0">"m_current_file|wxString|CurrentFile||0|0|"</string>
+          <string name="variable-1">"m_difficulty|int|Difficulty|sudGen::difficulty_medium|0|1|"</string>
+          <string name="variable-2">"m_custom_dimensions|wxSize|CustomDimensions|wxSize(-1,-1)|0|1|"</string>
+          <string name="variable-3">"m_dimensions|wxSize|Dimensions|wxSize(3,3)|0|1|"</string>
+          <string name="variable-4">"m_generate_sudoku|bool|GenerateSudoku|true|0|1|"</string>
+          <string name="variable-5">"m_dimensions_selectedindex|int|DimensionsSelectedindex|0|0|1|"</string>
           <string name="proxy-Id name">"ID_SUDOKUSOLVERFRAME"</string>
           <long name="proxy-Id value">10000</long>
           <string name="proxy-Class">"sudFrame"</string>
@@ -494,10 +497,10 @@
           <bool name="proxy-Hidden">0</bool>
           <bool name="proxy-Enabled">1</bool>
           <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-          <string name="proxy-Data source">""</string>
-          <string name="proxy-Data class name">""</string>
-          <string name="proxy-Data class implementation filename">""</string>
-          <string name="proxy-Data class header filename">""</string>
+          <string name="proxy-Data source">"GetData()"</string>
+          <string name="proxy-Data class name">"sudGenData"</string>
+          <string name="proxy-Data class implementation filename">"sudgendata.cpp"</string>
+          <string name="proxy-Data class header filename">"sudgendata.h"</string>
           <string name="proxy-Data class manager window">""</string>
           <bool name="proxy-wxDEFAULT_FRAME_STYLE">0</bool>
           <bool name="proxy-wxCAPTION">1</bool>
@@ -549,7 +552,7 @@
             <string name="proxy-Id name">"ID_MENUBAR1"</string>
             <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
             <document>
-              <string name="title">"Sudoku"</string>
+              <string name="title">"File"</string>
               <string name="type">"dialog-control-document"</string>
               <string name="filename">""</string>
               <string name="icon-name">"menu"</string>
@@ -557,9 +560,9 @@
               <long name="owns-file">1</long>
               <long name="title-mode">0</long>
               <long name="locked">0</long>
-              <string name="created">"7/7/2007"</string>
+              <string name="created">"4/5/2008"</string>
               <string name="proxy-type">"wbMenuProxy"</string>
-              <string name="proxy-Label">"&amp;Sudoku"</string>
+              <string name="proxy-Label">"&amp;File"</string>
               <bool name="proxy-Enabled">1</bool>
               <string name="proxy-Member variable name">""</string>
               <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
@@ -572,9 +575,9 @@
                 <long name="owns-file">1</long>
                 <long name="title-mode">0</long>
                 <long name="locked">0</long>
-                <string name="created">"7/7/2007"</string>
+                <string name="created">"4/5/2008"</string>
                 <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="event-handler-0">"wxEVT_COMMAND_MENU_SELECTED|OnNewClick|NONE||"</string>
+                <string name="event-handler-0">"wxEVT_COMMAND_MENU_SELECTED|OnNewClick|NONE||sudFrame"</string>
                 <string name="proxy-Id name">"wxID_NEW"</string>
                 <long name="proxy-Id value">5002</long>
                 <string name="proxy-Label">"&amp;New\tCtrl+N"</string>
@@ -594,16 +597,16 @@
                 <long name="owns-file">1</long>
                 <long name="title-mode">0</long>
                 <long name="locked">0</long>
-                <string name="created">"7/7/2007"</string>
+                <string name="created">"4/5/2008"</string>
                 <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="event-handler-0">"wxEVT_COMMAND_MENU_SELECTED|OnOpenClick|NONE||"</string>
+                <string name="event-handler-0">"wxEVT_COMMAND_MENU_SELECTED|OnOpenClick|NONE||sudFrame"</string>
                 <string name="proxy-Id name">"wxID_OPEN"</string>
                 <long name="proxy-Id value">5000</long>
                 <string name="proxy-Label">"&amp;Open\tCtrl+O"</string>
                 <string name="proxy-Kind">"Normal"</string>
                 <bool name="proxy-Checked">0</bool>
                 <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Help text">"Load a sudoku from a text file"</string>
+                <string name="proxy-Help text">"Load a sudoku from the local file system"</string>
                 <string name="proxy-Bitmap">""</string>
                 <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
               </document>
@@ -616,16 +619,16 @@
                 <long name="owns-file">1</long>
                 <long name="title-mode">0</long>
                 <long name="locked">0</long>
-                <string name="created">"7/7/2007"</string>
+                <string name="created">"4/5/2008"</string>
                 <string name="proxy-type">"wbMenuItemProxy"</string>
-                <string name="event-handler-0">"wxEVT_COMMAND_MENU_SELECTED|OnSaveClick|NONE||"</string>
+                <string name="event-handler-0">"wxEVT_COMMAND_MENU_SELECTED|OnSaveClick|NONE||sudFrame"</string>
                 <string name="proxy-Id name">"wxID_SAVE"</string>
                 <long name="proxy-Id value">5003</long>
                 <string name="proxy-Label">"&amp;Save\tCtrl+S"</string>
                 <string name="proxy-Kind">"Normal"</string>
                 <bool name="proxy-Checked">0</bool>
                 <bool name="proxy-Enabled">1</bool>
-                <string name="proxy-Help text">"Save current sudoku to a text file"</string>
+                <string name="proxy-Help text">"Save current sudoku to the local file system"</string>
                 <string name="proxy-Bitmap">""</string>
                 <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
               </document>
@@ -638,7 +641,7 @@
                 <long name="owns-file">1</long>
                 <long name="title-mode">0</long>
                 <long name="locked">0</long>
-                <string name="created">"7/7/2007"</string>
+                <string name="created">"4/5/2008"</string>
                 <string name="proxy-type">"wbMenuSeparatorProxy"</string>
                 <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
               </document>
@@ -651,7 +654,7 @@
                 <long name="owns-file">1</long>
                 <long name="title-mode">0</long>
                 <long name="locked">0</long>
-                <string name="created">"7/7/2007"</string>
+                <string name="created">"4/5/2008"</string>
                 <string name="proxy-type">"wbMenuItemProxy"</string>
                 <string name="event-handler-0">"wxEVT_COMMAND_MENU_SELECTED|OnExitClick|NONE||"</string>
                 <string name="proxy-Id name">"wxID_EXIT"</string>
@@ -661,6 +664,180 @@
                 <bool name="proxy-Checked">0</bool>
                 <bool name="proxy-Enabled">1</bool>
                 <string name="proxy-Help text">"Exit the application"</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+            </document>
+            <document>
+              <string name="title">"Sudoku"</string>
+              <string name="type">"dialog-control-document"</string>
+              <string name="filename">""</string>
+              <string name="icon-name">"menu"</string>
+              <long name="is-transient">0</long>
+              <long name="owns-file">1</long>
+              <long name="title-mode">0</long>
+              <long name="locked">0</long>
+              <string name="created">"7/7/2007"</string>
+              <string name="proxy-type">"wbMenuProxy"</string>
+              <string name="proxy-Label">"&amp;Sudoku"</string>
+              <bool name="proxy-Enabled">1</bool>
+              <string name="proxy-Member variable name">""</string>
+              <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              <document>
+                <string name="title">"&amp;Easy\tF1: ID_MENUITEM_EASY"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="created">"2/5/2008"</string>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="event-handler-0">"wxEVT_UPDATE_UI|OnMenuitemEasyUpdate|NONE||"</string>
+                <string name="proxy-Id name">"ID_MENUITEM_EASY"</string>
+                <long name="proxy-Id value">10016</long>
+                <string name="proxy-Label">"&amp;Easy\tF1"</string>
+                <string name="proxy-Kind">"Check"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"&amp;Medium\tF2: ID_MENUITEM_MEDIUM"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="created">"2/5/2008"</string>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="event-handler-0">"wxEVT_UPDATE_UI|OnMenuitemMediumUpdate|NONE||"</string>
+                <string name="proxy-Id name">"ID_MENUITEM_MEDIUM"</string>
+                <long name="proxy-Id value">10017</long>
+                <string name="proxy-Label">"&amp;Medium\tF2"</string>
+                <string name="proxy-Kind">"Check"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"&amp;Hard\tF3: ID_MENUITEM_HARD"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="created">"2/5/2008"</string>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="event-handler-0">"wxEVT_UPDATE_UI|OnMenuitemHardUpdate|NONE||"</string>
+                <string name="proxy-Id name">"ID_MENUITEM_HARD"</string>
+                <long name="proxy-Id value">10018</long>
+                <string name="proxy-Label">"&amp;Hard\tF3"</string>
+                <string name="proxy-Kind">"Check"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"------------"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="created">"2/5/2008"</string>
+                <string name="proxy-type">"wbMenuSeparatorProxy"</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"&amp;Refill\tF4: ID_MENUITEM_REFILL"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="created">"5/5/2008"</string>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="event-handler-0">"wxEVT_COMMAND_MENU_SELECTED|OnMenuitemRefillClick|NONE||sudFrame"</string>
+                <string name="proxy-Id name">"ID_MENUITEM_REFILL"</string>
+                <long name="proxy-Id value">10021</long>
+                <string name="proxy-Label">"&amp;Refill\tF4"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"&amp;Generate\tF5: ID_MENUITEM_GENERATE"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="created">"4/5/2008"</string>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="event-handler-0">"wxEVT_COMMAND_MENU_SELECTED|OnMenuitemGenerateClick|NONE||sudFrame"</string>
+                <string name="proxy-Id name">"ID_MENUITEM_GENERATE"</string>
+                <long name="proxy-Id value">10020</long>
+                <string name="proxy-Label">"&amp;Generate\tF5"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
+                <string name="proxy-Bitmap">""</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"------------"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="created">"4/5/2008"</string>
+                <string name="proxy-type">"wbMenuSeparatorProxy"</string>
+                <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+              </document>
+              <document>
+                <string name="title">"&amp;Clear\tF6: ID_MENUITEM_CLEAR"</string>
+                <string name="type">"dialog-control-document"</string>
+                <string name="filename">""</string>
+                <string name="icon-name">"menuitem"</string>
+                <long name="is-transient">0</long>
+                <long name="owns-file">1</long>
+                <long name="title-mode">0</long>
+                <long name="locked">0</long>
+                <string name="created">"4/5/2008"</string>
+                <string name="proxy-type">"wbMenuItemProxy"</string>
+                <string name="event-handler-0">"wxEVT_COMMAND_MENU_SELECTED|OnMenuitemClearClick|NONE||sudFrame"</string>
+                <string name="proxy-Id name">"ID_MENUITEM_CLEAR"</string>
+                <long name="proxy-Id value">10019</long>
+                <string name="proxy-Label">"&amp;Clear\tF6"</string>
+                <string name="proxy-Kind">"Normal"</string>
+                <bool name="proxy-Checked">0</bool>
+                <bool name="proxy-Enabled">1</bool>
+                <string name="proxy-Help text">""</string>
                 <string name="proxy-Bitmap">""</string>
                 <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
               </document>
@@ -899,7 +1076,7 @@
                   <bool name="proxy-wxNO_BORDER">0</bool>
                   <bool name="proxy-wxSIMPLE_BORDER">0</bool>
                   <bool name="proxy-wxDOUBLE_BORDER">0</bool>
-                  <bool name="proxy-wxSUNKEN_BORDER">0</bool>
+                  <bool name="proxy-wxSUNKEN_BORDER">1</bool>
                   <bool name="proxy-wxRAISED_BORDER">0</bool>
                   <bool name="proxy-wxSTATIC_BORDER">0</bool>
                   <bool name="proxy-wxWANTS_CHARS">0</bool>
@@ -1233,11 +1410,6 @@
           <string name="id-suffix">""</string>
           <long name="use-xrc">0</long>
           <long name="working-mode">0</long>
-          <string name="variable-0">"m_custom_dimensions|wxSize|CustomDimensions|wxSize(-1,-1)|0|0"</string>
-          <string name="variable-1">"m_dimensions|wxSize|Dimensions|wxSize(3,3)|0|0"</string>
-          <string name="variable-2">"m_generate_sudoku|bool|GenerateSudoku|true|0|0"</string>
-          <string name="variable-3">"m_difficulty|int|Difficulty|sudGen::difficulty_medium|0|0|"</string>
-          <string name="variable-4">"m_dimensions_selectedindex|int|DimensionsSelectedIndex|0|0|0"</string>
           <string name="proxy-Id name">"ID_SUDOKUCREATIONDIALOG"</string>
           <long name="proxy-Id value">10007</long>
           <string name="proxy-Class">"SudokuCreationDialog"</string>
@@ -1258,11 +1430,11 @@
           <bool name="proxy-Hidden">0</bool>
           <bool name="proxy-Enabled">1</bool>
           <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-          <string name="proxy-Data source">""</string>
-          <string name="proxy-Data class name">""</string>
+          <string name="proxy-Data source">"GetDataWindow()-&gt;GetData()"</string>
+          <string name="proxy-Data class name">"sudGenData"</string>
           <string name="proxy-Data class implementation filename">""</string>
           <string name="proxy-Data class header filename">""</string>
-          <string name="proxy-Data class manager window">""</string>
+          <string name="proxy-Data class manager window">"sudFrame"</string>
           <string name="proxy-Texture">""</string>
           <string name="proxy-Texture style">"Tiled"</string>
           <bool name="proxy-wxDEFAULT_DIALOG_STYLE">0</bool>
@@ -1433,8 +1605,8 @@
                     <bool name="proxy-Hidden">0</bool>
                     <bool name="proxy-Enabled">1</bool>
                     <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                    <string name="proxy-Data variable">"m_dimensions"</string>
-                    <string name="proxy-Data validator">"gwxValidator(new sudRadioDeliverer(&amp; %VARIABLE%, wxSize(3,3), &amp;m_dimensions_selectedindex, 0))"</string>
+                    <string name="proxy-Data variable">"GetDataWindow()-&gt;GetData().m_dimensions"</string>
+                    <string name="proxy-Data validator">"gwxValidator(new sudRadioDeliverer(&amp; %VARIABLE%, wxSize(3,3), &amp;GetData().m_dimensions_selectedindex, 0))"</string>
                     <string name="proxy-Data source">""</string>
                     <string name="proxy-Data class name">""</string>
                     <string name="proxy-Data class implementation filename">""</string>
@@ -1495,8 +1667,8 @@
                     <bool name="proxy-Hidden">0</bool>
                     <bool name="proxy-Enabled">1</bool>
                     <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                    <string name="proxy-Data variable">"m_dimensions"</string>
-                    <string name="proxy-Data validator">"gwxValidator(new sudRadioDeliverer(&amp; %VARIABLE%, wxSize(3,2), &amp;m_dimensions_selectedindex, 1))"</string>
+                    <string name="proxy-Data variable">"GetDataWindow()-&gt;GetData().m_dimensions"</string>
+                    <string name="proxy-Data validator">"gwxValidator(new sudRadioDeliverer(&amp; %VARIABLE%, wxSize(3,2), &amp;GetData().m_dimensions_selectedindex, 1))"</string>
                     <string name="proxy-Data source">""</string>
                     <string name="proxy-Data class name">""</string>
                     <string name="proxy-Data class implementation filename">""</string>
@@ -1557,8 +1729,8 @@
                     <bool name="proxy-Hidden">0</bool>
                     <bool name="proxy-Enabled">1</bool>
                     <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                    <string name="proxy-Data variable">"m_dimensions"</string>
-                    <string name="proxy-Data validator">"gwxValidator(new sudRadioDeliverer(&amp; %VARIABLE%, wxSize(2,3), &amp;m_dimensions_selectedindex, 2))"</string>
+                    <string name="proxy-Data variable">"GetDataWindow()-&gt;GetData().m_dimensions"</string>
+                    <string name="proxy-Data validator">"gwxValidator(new sudRadioDeliverer(&amp; %VARIABLE%, wxSize(2,3), &amp;GetData().m_dimensions_selectedindex, 2))"</string>
                     <string name="proxy-Data source">""</string>
                     <string name="proxy-Data class name">""</string>
                     <string name="proxy-Data class implementation filename">""</string>
@@ -1647,7 +1819,7 @@
                   <bool name="proxy-Hidden">0</bool>
                   <bool name="proxy-Enabled">1</bool>
                   <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                  <string name="proxy-Data variable">"m_dimensions"</string>
+                  <string name="proxy-Data variable">"GetDataWindow()-&gt;GetData().m_dimensions"</string>
                   <string name="proxy-Data validator">"gwxValidator(m_customdeliverer)"</string>
                   <string name="proxy-Data source">""</string>
                   <string name="proxy-Data class name">""</string>
@@ -1791,7 +1963,6 @@
                   <long name="locked">0</long>
                   <string name="created">"27/7/2007"</string>
                   <string name="proxy-type">"wbCheckBoxProxy"</string>
-                  <string name="event-handler-0">"wxEVT_UPDATE_UI|OnCheckGenActivateUpdate|NONE||"</string>
                   <string name="proxy-Id name">"ID_CHECK_GEN_ACTIVATE"</string>
                   <long name="proxy-Id value">10012</long>
                   <string name="proxy-Name">""</string>
@@ -1806,7 +1977,7 @@
                   <bool name="proxy-Initial value">0</bool>
                   <string name="proxy-Help text">""</string>
                   <string name="proxy-Tooltip text">""</string>
-                  <string name="proxy-Data variable">"m_generate_sudoku"</string>
+                  <string name="proxy-Data variable">"GetDataWindow()-&gt;GetData().m_generate_sudoku"</string>
                   <string name="proxy-Data validator">"wxGenericValidator(&amp; %VARIABLE%)"</string>
                   <string name="proxy-Data source">""</string>
                   <string name="proxy-Data class name">""</string>
@@ -1931,7 +2102,7 @@
                     <bool name="proxy-Hidden">0</bool>
                     <bool name="proxy-Enabled">1</bool>
                     <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                    <string name="proxy-Data variable">"m_difficulty"</string>
+                    <string name="proxy-Data variable">"GetDataWindow()-&gt;GetData().m_difficulty"</string>
                     <string name="proxy-Data validator">"gwxValidator(new gwxValueCheckDeliverer&lt;int&gt;( &amp; %VARIABLE%, sudGen::difficulty_easy ))"</string>
                     <string name="proxy-Data source">""</string>
                     <string name="proxy-Data class name">""</string>
@@ -1994,7 +2165,7 @@
                     <bool name="proxy-Hidden">0</bool>
                     <bool name="proxy-Enabled">1</bool>
                     <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                    <string name="proxy-Data variable">"m_difficulty"</string>
+                    <string name="proxy-Data variable">"GetDataWindow()-&gt;GetData().m_difficulty"</string>
                     <string name="proxy-Data validator">"gwxValidator(new gwxValueCheckDeliverer&lt;int&gt;( &amp; %VARIABLE%, sudGen::difficulty_medium ) )"</string>
                     <string name="proxy-Data source">""</string>
                     <string name="proxy-Data class name">""</string>
@@ -2057,7 +2228,7 @@
                     <bool name="proxy-Hidden">0</bool>
                     <bool name="proxy-Enabled">1</bool>
                     <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
-                    <string name="proxy-Data variable">"m_difficulty"</string>
+                    <string name="proxy-Data variable">"GetDataWindow()-&gt;GetData().m_difficulty"</string>
                     <string name="proxy-Data validator">"gwxValidator(new gwxValueCheckDeliverer&lt;int&gt;( &amp; %VARIABLE%, sudGen::difficulty_hard ) )"</string>
                     <string name="proxy-Data source">""</string>
                     <string name="proxy-Data class name">""</string>
@@ -2351,6 +2522,14 @@
             <string name="proxy-type">"wbBoxSizerProxy"</string>
             <string name="proxy-Orientation">"Vertical"</string>
             <string name="proxy-Member variable name">""</string>
+            <string name="proxy-AlignH">"Centre"</string>
+            <string name="proxy-AlignV">"Centre"</string>
+            <long name="proxy-Stretch factor">0</long>
+            <long name="proxy-Border">5</long>
+            <bool name="proxy-wxLEFT">1</bool>
+            <bool name="proxy-wxRIGHT">1</bool>
+            <bool name="proxy-wxTOP">1</bool>
+            <bool name="proxy-wxBOTTOM">1</bool>
             <bool name="proxy-wxSHAPED">0</bool>
             <bool name="proxy-wxADJUST_MINSIZE">0</bool>
             <bool name="proxy-wxFIXED_MINSIZE">0</bool>
@@ -2401,7 +2580,7 @@
                 <string name="proxy-Implementation filename">""</string>
                 <string name="proxy-Header filename">""</string>
                 <string name="proxy-Member variable name">""</string>
-                <string name="proxy-Label">"Please wait, while wxSudoku generates a new sudoku.
+                <string name="proxy-Label">"Please wait, while wxSudoku generates the sudoku.
 Unfortunately, for large sudokus this can require a significant amount of time.
 (Depending on the size - up to several minutes!)
 
@@ -2488,7 +2667,7 @@ Thank you for your patience"</string>
                   <long name="owns-file">1</long>
                   <long name="title-mode">0</long>
                   <long name="locked">0</long>
-                  <string name="created">"19/12/2007"</string>
+                  <string name="created">"2/5/2008"</string>
                   <string name="proxy-type">"wbButtonProxy"</string>
                   <string name="event-handler-0">"wxEVT_COMMAND_BUTTON_CLICKED|OnButtonRestartClick|NONE||sudWaitDialog"</string>
                   <string name="proxy-Id name">"ID_BUTTON_RESTART"</string>
@@ -2502,6 +2681,73 @@ Thank you for your patience"</string>
                   <string name="proxy-Header filename">""</string>
                   <string name="proxy-Member variable name">""</string>
                   <string name="proxy-Label">"&amp;Restart"</string>
+                  <bool name="proxy-Default">0</bool>
+                  <string name="proxy-Help text">""</string>
+                  <string name="proxy-Tooltip text">""</string>
+                  <string name="proxy-Data variable">""</string>
+                  <string name="proxy-Data validator">""</string>
+                  <string name="proxy-Data source">""</string>
+                  <string name="proxy-Data class name">""</string>
+                  <string name="proxy-Data class implementation filename">""</string>
+                  <string name="proxy-Data class header filename">""</string>
+                  <string name="proxy-Data class manager window">""</string>
+                  <string name="proxy-Background colour">""</string>
+                  <string name="proxy-Foreground colour">""</string>
+                  <string name="proxy-Font">""</string>
+                  <bool name="proxy-Hidden">0</bool>
+                  <bool name="proxy-Enabled">1</bool>
+                  <string name="proxy-Platform">"&lt;Any platform&gt;"</string>
+                  <bool name="proxy-wxBU_LEFT">0</bool>
+                  <bool name="proxy-wxBU_RIGHT">0</bool>
+                  <bool name="proxy-wxBU_TOP">0</bool>
+                  <bool name="proxy-wxBU_BOTTOM">0</bool>
+                  <bool name="proxy-wxBU_EXACTFIT">0</bool>
+                  <bool name="proxy-wxNO_BORDER">0</bool>
+                  <bool name="proxy-wxWANTS_CHARS">0</bool>
+                  <bool name="proxy-wxNO_FULL_REPAINT_ON_RESIZE">0</bool>
+                  <bool name="proxy-wxFULL_REPAINT_ON_RESIZE">0</bool>
+                  <string name="proxy-Custom styles">""</string>
+                  <long name="proxy-X">-1</long>
+                  <long name="proxy-Y">-1</long>
+                  <long name="proxy-Width">-1</long>
+                  <long name="proxy-Height">-1</long>
+                  <string name="proxy-AlignH">"Centre"</string>
+                  <string name="proxy-AlignV">"Centre"</string>
+                  <long name="proxy-Stretch factor">0</long>
+                  <long name="proxy-Border">5</long>
+                  <bool name="proxy-wxLEFT">1</bool>
+                  <bool name="proxy-wxRIGHT">1</bool>
+                  <bool name="proxy-wxTOP">1</bool>
+                  <bool name="proxy-wxBOTTOM">1</bool>
+                  <bool name="proxy-wxSHAPED">0</bool>
+                  <bool name="proxy-wxADJUST_MINSIZE">0</bool>
+                  <bool name="proxy-wxFIXED_MINSIZE">0</bool>
+                  <string name="proxy-Custom arguments">""</string>
+                  <string name="proxy-Custom ctor arguments">""</string>
+                </document>
+                <document>
+                  <string name="title">"wxButton: wxID_STOP"</string>
+                  <string name="type">"dialog-control-document"</string>
+                  <string name="filename">""</string>
+                  <string name="icon-name">"dialogcontrol"</string>
+                  <long name="is-transient">0</long>
+                  <long name="owns-file">1</long>
+                  <long name="title-mode">0</long>
+                  <long name="locked">0</long>
+                  <string name="created">"2/5/2008"</string>
+                  <string name="proxy-type">"wbButtonProxy"</string>
+                  <string name="event-handler-0">"wxEVT_COMMAND_BUTTON_CLICKED|OnStopClick|NONE||sudWaitDialog"</string>
+                  <string name="proxy-Id name">"wxID_STOP"</string>
+                  <long name="proxy-Id value">5124</long>
+                  <string name="proxy-Name">""</string>
+                  <string name="proxy-Class">"wxButton"</string>
+                  <string name="proxy-Base class">"wxButton"</string>
+                  <bool name="proxy-External implementation">1</bool>
+                  <bool name="proxy-Separate files">0</bool>
+                  <string name="proxy-Implementation filename">""</string>
+                  <string name="proxy-Header filename">""</string>
+                  <string name="proxy-Member variable name">""</string>
+                  <string name="proxy-Label">"&amp;Stop"</string>
                   <bool name="proxy-Default">0</bool>
                   <string name="proxy-Help text">""</string>
                   <string name="proxy-Tooltip text">""</string>
@@ -2637,6 +2883,30 @@ Thank you for your patience"</string>
           <long name="title-mode">1</long>
           <long name="locked">0</long>
           <string name="created">"8/7/2007"</string>
+          <string name="language">""</string>
+        </document>
+        <document>
+          <string name="title">"sudgendata.cpp"</string>
+          <string name="type">"source-editor-document"</string>
+          <string name="filename">"sudgendata.cpp"</string>
+          <string name="icon-name">"source-editor"</string>
+          <long name="is-transient">0</long>
+          <long name="owns-file">0</long>
+          <long name="title-mode">1</long>
+          <long name="locked">0</long>
+          <string name="created">"3/5/2008"</string>
+          <string name="language">""</string>
+        </document>
+        <document>
+          <string name="title">"sudgendata.h"</string>
+          <string name="type">"source-editor-document"</string>
+          <string name="filename">"sudgendata.h"</string>
+          <string name="icon-name">"source-editor"</string>
+          <long name="is-transient">0</long>
+          <long name="owns-file">0</long>
+          <long name="title-mode">1</long>
+          <long name="locked">0</long>
+          <string name="created">"3/5/2008"</string>
           <string name="language">""</string>
         </document>
         <document>

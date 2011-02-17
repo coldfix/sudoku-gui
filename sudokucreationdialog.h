@@ -26,6 +26,9 @@
 #include "wx/valgen.h"
 ////@end includes
 
+#include "sudFrame.h"
+
+
 /*!
  * Forward declarations
  */
@@ -34,6 +37,7 @@
 ////@end forward declarations
 
 class sudRadioDeliverer;
+class sudGenData;
 
 /*!
  * Control identifiers
@@ -54,16 +58,16 @@ class sudRadioDeliverer;
 
 class SudokuCreationDialog: public wxDialog
 {    
-    DECLARE_DYNAMIC_CLASS( SudokuCreationDialog )
+    DECLARE_DYNAMIC_CLASS(SudokuCreationDialog)
     DECLARE_EVENT_TABLE()
 
 public:
     /// Constructors
     SudokuCreationDialog();
-    SudokuCreationDialog( wxWindow* parent, wxWindowID id = SYMBOL_SUDOKUCREATIONDIALOG_IDNAME, const wxString& caption = SYMBOL_SUDOKUCREATIONDIALOG_TITLE, const wxPoint& pos = SYMBOL_SUDOKUCREATIONDIALOG_POSITION, const wxSize& size = SYMBOL_SUDOKUCREATIONDIALOG_SIZE, long style = SYMBOL_SUDOKUCREATIONDIALOG_STYLE );
+    SudokuCreationDialog(wxWindow* parent, wxWindowID id = SYMBOL_SUDOKUCREATIONDIALOG_IDNAME, const wxString& caption = SYMBOL_SUDOKUCREATIONDIALOG_TITLE, const wxPoint& pos = SYMBOL_SUDOKUCREATIONDIALOG_POSITION, const wxSize& size = SYMBOL_SUDOKUCREATIONDIALOG_SIZE, long style = SYMBOL_SUDOKUCREATIONDIALOG_STYLE);
 
     /// Creation
-    bool Create( wxWindow* parent, wxWindowID id = SYMBOL_SUDOKUCREATIONDIALOG_IDNAME, const wxString& caption = SYMBOL_SUDOKUCREATIONDIALOG_TITLE, const wxPoint& pos = SYMBOL_SUDOKUCREATIONDIALOG_POSITION, const wxSize& size = SYMBOL_SUDOKUCREATIONDIALOG_SIZE, long style = SYMBOL_SUDOKUCREATIONDIALOG_STYLE );
+    bool Create(wxWindow* parent, wxWindowID id = SYMBOL_SUDOKUCREATIONDIALOG_IDNAME, const wxString& caption = SYMBOL_SUDOKUCREATIONDIALOG_TITLE, const wxPoint& pos = SYMBOL_SUDOKUCREATIONDIALOG_POSITION, const wxSize& size = SYMBOL_SUDOKUCREATIONDIALOG_SIZE, long style = SYMBOL_SUDOKUCREATIONDIALOG_STYLE);
 
     /// Destructor
     ~SudokuCreationDialog();
@@ -77,6 +81,8 @@ public:
 	///
 	bool CustomDimensionsDialog();
 
+	sudGenData& GetData();
+
 ////@begin SudokuCreationDialog event handler declarations
 
     /// wxEVT_COMMAND_RADIOBUTTON_SELECTED event handler for ID_RADIO_DIM_CUST
@@ -84,9 +90,6 @@ public:
 
     /// wxEVT_COMMAND_BUTTON_CLICKED event handler for ID_BUTTON_DIM_CUST
     void OnButtonDimCustClick( wxCommandEvent& event );
-
-    /// wxEVT_UPDATE_UI event handler for ID_CHECK_GEN_ACTIVATE
-    void OnCheckGenActivateUpdate( wxUpdateUIEvent& event );
 
     /// wxEVT_UPDATE_UI event handler for ID_RADIO_DIFF_EASY
     void OnRadioDiffEasyUpdate( wxUpdateUIEvent& event );
@@ -104,20 +107,8 @@ public:
 
 ////@begin SudokuCreationDialog member function declarations
 
-    wxSize GetCustomDimensions() const { return m_custom_dimensions ; }
-    void SetCustomDimensions(wxSize value) { m_custom_dimensions = value ; }
-
-    wxSize GetDimensions() const { return m_dimensions ; }
-    void SetDimensions(wxSize value) { m_dimensions = value ; }
-
-    bool GetGenerateSudoku() const { return m_generate_sudoku ; }
-    void SetGenerateSudoku(bool value) { m_generate_sudoku = value ; }
-
-    int GetDifficulty() const { return m_difficulty ; }
-    void SetDifficulty(int value) { m_difficulty = value ; }
-
-    int GetDimensionsSelectedIndex() const { return m_dimensions_selectedindex ; }
-    void SetDimensionsSelectedIndex(int value) { m_dimensions_selectedindex = value ; }
+    /// Data manager window access
+    sudFrame* GetDataWindow() { wxWindow* w = this; while (w && !w->IsKindOf(CLASSINFO(sudFrame))) { w = w->GetParent(); }; return (sudFrame*) w; }
 
     /// Retrieves bitmap resources
     wxBitmap GetBitmapResource( const wxString& name );
@@ -134,11 +125,6 @@ public:
 ////@begin SudokuCreationDialog member variables
     wxRadioButton* m_radio_dim_cust;
     wxCheckBox* m_check_generate;
-    wxSize m_custom_dimensions;
-    wxSize m_dimensions;
-    bool m_generate_sudoku;
-    int m_difficulty;
-    int m_dimensions_selectedindex;
     /// Control identifiers
     enum {
         ID_SUDOKUCREATIONDIALOG = 10007,
@@ -157,7 +143,7 @@ public:
 
 
 
-#include<gwx/Validators.h>
+#include <gwx/Validators.h>
 
 class sudRadioDeliverer : public gwxIndexCheckDeliverer<wxSize>{
 public:

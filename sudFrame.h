@@ -23,6 +23,7 @@
  */
 
 ////@begin includes
+#include "sudgendata.h"
 #include "wx/frame.h"
 #include "wx/tglbtn.h"
 #include "wx/statusbr.h"
@@ -58,15 +59,15 @@ class SudokuCreationDialog;
 
 class sudFrame: public wxFrame
 {    
-    DECLARE_CLASS( sudFrame )
+    DECLARE_CLASS(sudFrame)
     DECLARE_EVENT_TABLE()
 
 public:
     /// Constructors
     sudFrame();
-    sudFrame( wxWindow* parent, wxWindowID id = SYMBOL_SUDFRAME_IDNAME, const wxString& caption = SYMBOL_SUDFRAME_TITLE, const wxPoint& pos = SYMBOL_SUDFRAME_POSITION, const wxSize& size = SYMBOL_SUDFRAME_SIZE, long style = SYMBOL_SUDFRAME_STYLE );
+    sudFrame(wxWindow* parent, wxWindowID id = SYMBOL_SUDFRAME_IDNAME, const wxString& caption = SYMBOL_SUDFRAME_TITLE, const wxPoint& pos = SYMBOL_SUDFRAME_POSITION, const wxSize& size = SYMBOL_SUDFRAME_SIZE, long style = SYMBOL_SUDFRAME_STYLE);
 
-    bool Create( wxWindow* parent, wxWindowID id = SYMBOL_SUDFRAME_IDNAME, const wxString& caption = SYMBOL_SUDFRAME_TITLE, const wxPoint& pos = SYMBOL_SUDFRAME_POSITION, const wxSize& size = SYMBOL_SUDFRAME_SIZE, long style = SYMBOL_SUDFRAME_STYLE );
+    bool Create(wxWindow* parent, wxWindowID id = SYMBOL_SUDFRAME_IDNAME, const wxString& caption = SYMBOL_SUDFRAME_TITLE, const wxPoint& pos = SYMBOL_SUDFRAME_POSITION, const wxSize& size = SYMBOL_SUDFRAME_SIZE, long style = SYMBOL_SUDFRAME_STYLE);
 
     /// Destructor
     ~sudFrame();
@@ -78,7 +79,14 @@ public:
     void CreateControls();
 
 
-	void OnMenuitemViewSizeClick( wxCommandEvent& event );
+    void OnMenuitemDifficultyClick(wxCommandEvent& event);
+	void OnMenuitemViewSizeClick(wxCommandEvent& event);
+
+    /// Transfer data to the window
+    virtual bool TransferDataToWindow();
+
+    /// Transfer data from the window
+    virtual bool TransferDataFromWindow();
 
 ////@begin sudFrame event handler declarations
 
@@ -93,6 +101,24 @@ public:
 
     /// wxEVT_COMMAND_MENU_SELECTED event handler for wxID_EXIT
     void OnExitClick( wxCommandEvent& event );
+
+    /// wxEVT_UPDATE_UI event handler for ID_MENUITEM_EASY
+    void OnMenuitemEasyUpdate( wxUpdateUIEvent& event );
+
+    /// wxEVT_UPDATE_UI event handler for ID_MENUITEM_MEDIUM
+    void OnMenuitemMediumUpdate( wxUpdateUIEvent& event );
+
+    /// wxEVT_UPDATE_UI event handler for ID_MENUITEM_HARD
+    void OnMenuitemHardUpdate( wxUpdateUIEvent& event );
+
+    /// wxEVT_COMMAND_MENU_SELECTED event handler for ID_MENUITEM_REFILL
+    void OnMenuitemRefillClick( wxCommandEvent& event );
+
+    /// wxEVT_COMMAND_MENU_SELECTED event handler for ID_MENUITEM_GENERATE
+    void OnMenuitemGenerateClick( wxCommandEvent& event );
+
+    /// wxEVT_COMMAND_MENU_SELECTED event handler for ID_MENUITEM_CLEAR
+    void OnMenuitemClearClick( wxCommandEvent& event );
 
     /// wxEVT_UPDATE_UI event handler for ID_MENUITEM_VIEW_SMALL
     void OnMenuitemViewSmallUpdate( wxUpdateUIEvent& event );
@@ -127,20 +153,21 @@ public:
 ////@end sudFrame event handler declarations
 
 	sudEditor* GetEditor() const;
-	void sudGenerate();
-	wxString sudSaveHtml();
-	void LoadFile(wxString fname);
+
+	enum { _regen, _mutate, _refill };
+	void sudGenerate(int action = _regen);
+
+	void LoadFile(const wxString& fname);
 
 ////@begin sudFrame member function declarations
-
-    wxString GetCurrentDirectory() const { return m_current_directory ; }
-    void SetCurrentDirectory(wxString value) { m_current_directory = value ; }
 
     wxString GetCurrentFile() const { return m_current_file ; }
     void SetCurrentFile(wxString value) { m_current_file = value ; }
 
-    int GetDifficulty() const { return m_difficulty ; }
-    void SetDifficulty(int value) { m_difficulty = value ; }
+    /// Data access
+    sudGenData& GetData() { return m_data; }
+    const sudGenData& GetData() const { return m_data; }
+    void SetData(const sudGenData& data) { m_data = data; }
 
     /// Retrieves bitmap resources
     wxBitmap GetBitmapResource( const wxString& name );
@@ -152,17 +179,22 @@ public:
     /// Should we show tooltips?
     static bool ShowToolTips();
 
-	SudokuCreationDialog* m_crtdlg;
 ////@begin sudFrame member variables
     sudGrid* m_sudgrid;
     wxToggleButton* m_button_showsolution;
     wxToggleButton* m_button_entersudoku;
-    wxString m_current_directory;
     wxString m_current_file;
-    int m_difficulty;
+    /// The data edited by this window
+    sudGenData m_data;
     /// Control identifiers
     enum {
         ID_SUDOKUSOLVERFRAME = 10000,
+        ID_MENUITEM_EASY = 10016,
+        ID_MENUITEM_MEDIUM = 10017,
+        ID_MENUITEM_HARD = 10018,
+        ID_MENUITEM_REFILL = 10021,
+        ID_MENUITEM_GENERATE = 10020,
+        ID_MENUITEM_CLEAR = 10019,
         ID_MENUITEM_VIEW_SMALL = 10030,
         ID_MENUITEM_VIEW_NORMAL = 10031,
         ID_MENUITEM_VIEW_BIG = 10032,
@@ -172,8 +204,9 @@ public:
         ID_STATUSBAR1 = 10006
     };
 ////@end sudFrame member variables
+
+	int m_gentime, m_reducetime;
 	bool m_generated;
-	int m_gentime,m_reducetime;
 };
 
 #endif

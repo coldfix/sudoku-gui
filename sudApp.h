@@ -45,7 +45,7 @@
 
 class sudApp: public wxApp
 {    
-    DECLARE_CLASS( sudApp )
+    DECLARE_CLASS(sudApp)
     DECLARE_EVENT_TABLE()
 
 public:
