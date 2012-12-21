@@ -1,12 +1,12 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:        sudApp.cpp
-// Purpose:     
-// Author:      Thomas Gläßle
-// Modified by: 
+// Purpose:
+// Author:      Thomas GlÃ¤ÃŸle
+// Modified by:
 // Created:     16/07/2007 18:44:00
-// RCS-ID:      
-// Copyright:   Thomas Gläßle (C) 2007
-// Licence:     
+// RCS-ID:
+// Copyright:   Thomas GlÃ¤ÃŸle (C) 2007
+// Licence:
 /////////////////////////////////////////////////////////////////////////////
 
 #if defined(__GNUG__) && !defined(NO_GCC_PRAGMA)
@@ -87,16 +87,16 @@ void sudApp::Init()
 
 bool sudApp::OnInit()
 {
-	SetAppName(wxT("wxSudoku"));
+    SetAppName(wxT("wxSudoku"));
 
-	sudFrame* mainWindow = new sudFrame(NULL, sudFrame::ID_SUDOKUSOLVERFRAME);
-	if (argc == 2)
-		mainWindow->LoadFile(argv[1]);
-	else
-		mainWindow->sudGenerate();
-	mainWindow->Show(true);
+    sudFrame* mainWindow = new sudFrame(NULL, sudFrame::ID_SUDOKUSOLVERFRAME);
+    if (argc == 2)
+        mainWindow->LoadFile(argv[1]);
+    else
+        mainWindow->sudGenerate();
+    mainWindow->Show(true);
 
-	return true;
+    return true;
 }
 
 
@@ -105,9 +105,9 @@ bool sudApp::OnInit()
  */
 
 int sudApp::OnExit()
-{    
+{
 ////@begin sudApp cleanup
-	return wxApp::OnExit();
+    return wxApp::OnExit();
 ////@end sudApp cleanup
 }
 

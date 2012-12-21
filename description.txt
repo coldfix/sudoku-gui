@@ -12,7 +12,7 @@ The program is under free license.
 It is free for copy and uncomercial redistribution.
 
 Source code can be requested at:
-	t_glaessle@gmx.de
+    t_glaessle@gmx.de
 
 
 _______
@@ -38,18 +38,18 @@ Use of [Tab] or [Return] enables you to work both in a row-oriented and in a col
 ______
 3. Credits:
 
-Developed by Thomas Gläßle
+Developed by Thomas GlÃ¤ÃŸle
 Contact: t_glaessle@gmx.de
 Website: http://www.thomas-glaessle.de.vu
 
 If you spot any bugs or see room for improvement, please contact me.
 
 Binary:
-	> Windows 2000 / XP / NT
+    > Windows 2000 / XP / NT
 
 The application has been devoloped using
-	> Microsoft Visual C++ 2005 Express Edition
-	> Anthemon's DialogBlocks 4.18 Personal Edition
-	> wxWidgets 2.8.4
-	> STLport 5.1.5
+    > Microsoft Visual C++ 2005 Express Edition
+    > Anthemon's DialogBlocks 4.18 Personal Edition
+    > wxWidgets 2.8.4
+    > STLport 5.1.5
 

@@ -12,64 +12,64 @@ class wxInputStream;
 class SudokuSave
 {
 public:
-	SudokuSave();
-	~SudokuSave();
+    SudokuSave();
+    ~SudokuSave();
 
-	bool open(const wxString& file);
-	bool open(wxOutputStream*, bool del = false);
-	void close();
+    bool open(const wxString& file);
+    bool open(wxOutputStream*, bool del = false);
+    void close();
 
-	bool ok() const;
+    bool ok() const;
 
-	void save(const mSudoku&);
+    void save(const mSudoku&);
 
-	virtual wxString file_header();
-	virtual wxString file_entry(const mSudoku&);
-	virtual wxString file_footer();
+    virtual wxString file_header();
+    virtual wxString file_entry(const mSudoku&);
+    virtual wxString file_footer();
 
 protected:
-	wxOutputStream *m_stream;
-	bool m_delete;
+    wxOutputStream *m_stream;
+    bool m_delete;
 };
 
 class SudokuSaveHtml
-	: public SudokuSave
+    : public SudokuSave
 {
 public:
-	wxString file_header();
-	wxString file_entry(const mSudoku&);
-	wxString file_footer();
+    wxString file_header();
+    wxString file_entry(const mSudoku&);
+    wxString file_footer();
 };
 
 
 class SudokuLoad
 {
 public:
-	SudokuLoad();
-	~SudokuLoad();
+    SudokuLoad();
+    ~SudokuLoad();
 
-	bool open(const wxString& file);
-	bool open(wxInputStream*, bool del = false);
-	void close();
+    bool open(const wxString& file);
+    bool open(wxInputStream*, bool del = false);
+    void close();
 
-	bool ok() const;
+    bool ok() const;
 
-	virtual bool load(mSudoku&);
+    virtual bool load(mSudoku&);
 
-	bool eof();
-	bool fail();
+    bool eof();
+    bool fail();
 
 protected:
-	wxInputStream *m_stream;
-	bool m_delete;
+    wxInputStream *m_stream;
+    bool m_delete;
 };
 
 
 class SudokuLoadHtml
-	: public SudokuLoad
+    : public SudokuLoad
 {
 public:
-	bool load(mSudoku&);
+    bool load(mSudoku&);
 };
 
 

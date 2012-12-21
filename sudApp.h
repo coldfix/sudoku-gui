@@ -1,12 +1,12 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:        sudApp.h
-// Purpose:     
-// Author:      Thomas Gl‰ﬂle
-// Modified by: 
+// Purpose:
+// Author:      Thomas Gl√§√üle
+// Modified by:
 // Created:     16/07/2007 18:44:00
-// RCS-ID:      
-// Copyright:   Thomas Gl‰ﬂle (C) 2007
-// Licence:     
+// RCS-ID:
+// Copyright:   Thomas Gl√§√üle (C) 2007
+// Licence:
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef _SUDAPP_H_
@@ -44,7 +44,7 @@
  */
 
 class sudApp: public wxApp
-{    
+{
     DECLARE_CLASS(sudApp)
     DECLARE_EVENT_TABLE()
 
@@ -73,7 +73,7 @@ public:
 };
 
 /*!
- * Application instance declaration 
+ * Application instance declaration
  */
 
 ////@begin declare app
