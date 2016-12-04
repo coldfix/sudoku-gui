@@ -35,7 +35,7 @@
 #include "sudGen.h"
 #include "sudokusave.h"
 
-#include <gwx/aboutbox.h>
+#include "wxtk/aboutbox.h"
 #include "sudokucreationdialog.h"
 #include "waitdialog.h"
 
@@ -411,7 +411,7 @@ void sudFrame::OnExitClick(wxCommandEvent& event)
 
 void sudFrame::OnAboutClick(wxCommandEvent& event)
 {
-    gwxAboutBox dlg(this, wxID_ANY, about_title);
+    wxtk::AboutBox dlg(this, wxID_ANY, about_title);
     dlg.SetDescription(g_DescriptionTxt);
     dlg.SetAppname(about_appname);
     dlg.SetCopyright(about_copyright);

@@ -143,18 +143,18 @@ public:
 
 
 
-#include <gwx/Validators.h>
+#include "wxtk/validators.h"
 
-class sudRadioDeliverer : public gwxIndexCheckDeliverer<wxSize>{
+class sudRadioDeliverer : public wxtk::IndexCheckDeliverer<wxSize>{
 public:
     sudRadioDeliverer(ValueType *selectval,const ValueType&persval,
                     IndexType *selectidx,const IndexType&persidx)
-        : gwxIndexCheckDeliverer(selectval,persval,selectidx,persidx)
+        : wxtk::IndexCheckDeliverer(selectval,persval,selectidx,persidx)
     {
     }
 
     sudRadioDeliverer(const sudRadioDeliverer& val)
-        : gwxIndexCheckDeliverer(val)
+        : wxtk::IndexCheckDeliverer(val)
     {
     }
 
