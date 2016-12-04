@@ -1,7 +1,7 @@
 #ifndef __MSUDOKU_H__INCLUDED__
 #define __MSUDOKU_H__INCLUDED__
 
-#include "sudoku.h"
+#include "Sudoku.h"
 #include <vector>
 
 class mSudoku

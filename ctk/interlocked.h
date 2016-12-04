@@ -35,7 +35,29 @@ namespace ctk
     }
 
 #else
-# error Not implemented: ctk::interlocked
+
+    typedef long interlocked_t;
+
+    inline interlocked_t interlocked_increment(
+        volatile interlocked_t& v)
+    {
+        return ++v;
+    }
+
+    inline interlocked_t interlocked_decrement(
+        volatile interlocked_t& v)
+    {
+        return --v;
+    }
+
+    inline interlocked_t interlocked_exchange(
+        volatile interlocked_t& v,
+        interlocked_t ex)
+    {
+        interlocked_t tmp = v;
+        v = ex;
+        return tmp;
+    }
 #endif
 
 
@@ -54,7 +76,7 @@ public:
     interlocked_t operator ++ (int) { return interlocked_increment(value_) - 1; }
 
     interlocked_t operator -- () { return interlocked_decrement(value_); }
-    interlocked_t operator -- (int) { return interlocked_decrement(value_) - 1; }
+    interlocked_t operator -- (int) { return interlocked_decrement(value_) + 1; }
 
 
     interlocked_t exchange(interlocked_t new_value) {

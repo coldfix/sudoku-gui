@@ -1,16 +1,18 @@
 #include <wx/wxprec.h>
 
+
 #include "sudSolve.h"
 
+#include <cstdlib>
 #include <string.h>     // memcpy, memset
 
 
 
 int getrand(int range, int min){
-    return rand()/2%range + min; }
+    return std::rand()/2%range + min; }
 
 int getrand(int range){
-    return rand()/2%range; }
+    return std::rand()/2%range; }
 
 
 

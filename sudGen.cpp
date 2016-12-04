@@ -1,4 +1,5 @@
 #include <wx/wxprec.h>
+#include <wx/wx.h>
 
 #include "sudGen.h"
 #include "sudSolve.h"

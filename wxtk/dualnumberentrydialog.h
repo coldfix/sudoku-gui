@@ -98,11 +98,11 @@ public:
     wxString GetPrompt1() const { return m_prompt1 ; }
     void SetPrompt1(wxString value) { m_prompt1 = value ; }
 
-    gwxSpinInfo GetNumber0() const { return m_numinfo0 ; }
-    void SetNumber0(gwxSpinInfo value) { m_numinfo0 = value ; }
+    wxtk::SpinInfo GetNumber0() const { return m_numinfo0 ; }
+    void SetNumber0(wxtk::SpinInfo value) { m_numinfo0 = value ; }
 
-    gwxSpinInfo GetNumber1() const { return m_numinfo1 ; }
-    void SetNumber1(gwxSpinInfo value) { m_numinfo1 = value ; }
+    wxtk::SpinInfo GetNumber1() const { return m_numinfo1 ; }
+    void SetNumber1(wxtk::SpinInfo value) { m_numinfo1 = value ; }
 
     /// Retrieves bitmap resources
     wxBitmap GetBitmapResource( const wxString& name );
@@ -120,8 +120,8 @@ public:
     wxString m_message;
     wxString m_prompt0;
     wxString m_prompt1;
-    gwxSpinInfo m_numinfo0;
-    gwxSpinInfo m_numinfo1;
+    wxtk::SpinInfo m_numinfo0;
+    wxtk::SpinInfo m_numinfo1;
     /// Control identifiers
     enum {
         ID_DUALNUMBERENTRYDIALOG = 10003,
@@ -177,11 +177,11 @@ public:
     wxString GetPrompt1() const { return m_prompt1 ; }
     void SetPrompt1(wxString value) { m_prompt1 = value ; }
 
-    gwxSpinInfo GetNumber0() const { return m_numinfo0 ; }
-    void SetNumber0(gwxSpinInfo value) { m_numinfo0 = value ; }
+    wxtk::SpinInfo GetNumber0() const { return m_numinfo0 ; }
+    void SetNumber0(wxtk::SpinInfo value) { m_numinfo0 = value ; }
 
-    gwxSpinInfo GetNumber1() const { return m_numinfo1 ; }
-    void SetNumber1(gwxSpinInfo value) { m_numinfo1 = value ; }
+    wxtk::SpinInfo GetNumber1() const { return m_numinfo1 ; }
+    void SetNumber1(wxtk::SpinInfo value) { m_numinfo1 = value ; }
 
     /// Retrieves bitmap resources
     wxBitmap GetBitmapResource( const wxString& name );
@@ -197,8 +197,8 @@ public:
     wxString m_message;
     wxString m_prompt0;
     wxString m_prompt1;
-    gwxSpinInfo m_numinfo0;
-    gwxSpinInfo m_numinfo1;
+    wxtk::SpinInfo m_numinfo0;
+    wxtk::SpinInfo m_numinfo1;
     /// Control identifiers
     enum {
         ID_DUALNUMBERENTRYDIALOG = 10003,

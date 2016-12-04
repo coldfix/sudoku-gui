@@ -30,7 +30,7 @@
 ////@end includes
 
 #include "sudokucreationdialog.h"
-#include <gwx/DualNumberEntryDialog.h>
+#include "wxtk/dualnumberentrydialog.h"
 #include "sudGen.h"
 
 ////@begin XPM images
@@ -82,7 +82,7 @@ bool sudRadioDeliverer::DeliverTo(wxWindow* window)
     wxString label = wxString::Format(wxT("%s x %s"), numx, numy);
     if (((wxRadioButton*)window)->GetLabel() != label)
         ((wxRadioButton*)window)->SetLabel(label);
-    return gwxIndexCheckDeliverer::DeliverTo(window);
+    return IndexCheckDeliverer<wxSize>::DeliverTo(window);
 }
 
 
@@ -234,14 +234,14 @@ void SudokuCreationDialog::CreateControls()
     itemStdDialogButtonSizer19->Realize();
 
     // Set validators
-    itemRadioButton6->SetValidator( gwxValidator(new sudRadioDeliverer(& GetDataWindow()->GetData().m_dimensions, wxSize(3,3), &GetData().m_dimensions_selectedindex, 0)) );
-    itemRadioButton7->SetValidator( gwxValidator(new sudRadioDeliverer(& GetDataWindow()->GetData().m_dimensions, wxSize(3,2), &GetData().m_dimensions_selectedindex, 1)) );
-    itemRadioButton8->SetValidator( gwxValidator(new sudRadioDeliverer(& GetDataWindow()->GetData().m_dimensions, wxSize(2,3), &GetData().m_dimensions_selectedindex, 2)) );
-    m_radio_dim_cust->SetValidator( gwxValidator(m_customdeliverer) );
+    itemRadioButton6->SetValidator( wxtk::Validator(new sudRadioDeliverer(& GetDataWindow()->GetData().m_dimensions, wxSize(3,3), &GetData().m_dimensions_selectedindex, 0)) );
+    itemRadioButton7->SetValidator( wxtk::Validator(new sudRadioDeliverer(& GetDataWindow()->GetData().m_dimensions, wxSize(3,2), &GetData().m_dimensions_selectedindex, 1)) );
+    itemRadioButton8->SetValidator( wxtk::Validator(new sudRadioDeliverer(& GetDataWindow()->GetData().m_dimensions, wxSize(2,3), &GetData().m_dimensions_selectedindex, 2)) );
+    m_radio_dim_cust->SetValidator( wxtk::Validator(m_customdeliverer) );
     m_check_generate->SetValidator( wxGenericValidator(& GetDataWindow()->GetData().m_generate_sudoku) );
-    itemRadioButton16->SetValidator( gwxValidator(new gwxValueCheckDeliverer<int>( & GetDataWindow()->GetData().m_difficulty, sudGen::difficulty_easy )) );
-    itemRadioButton17->SetValidator( gwxValidator(new gwxValueCheckDeliverer<int>( & GetDataWindow()->GetData().m_difficulty, sudGen::difficulty_medium ) ) );
-    itemRadioButton18->SetValidator( gwxValidator(new gwxValueCheckDeliverer<int>( & GetDataWindow()->GetData().m_difficulty, sudGen::difficulty_hard ) ) );
+    itemRadioButton16->SetValidator( wxtk::Validator(new wxtk::ValueCheckDeliverer<int>( & GetDataWindow()->GetData().m_difficulty, sudGen::difficulty_easy )) );
+    itemRadioButton17->SetValidator( wxtk::Validator(new wxtk::ValueCheckDeliverer<int>( & GetDataWindow()->GetData().m_difficulty, sudGen::difficulty_medium ) ) );
+    itemRadioButton18->SetValidator( wxtk::Validator(new wxtk::ValueCheckDeliverer<int>( & GetDataWindow()->GetData().m_difficulty, sudGen::difficulty_hard ) ) );
 ////@end SudokuCreationDialog content construction
 }
 
@@ -340,12 +340,12 @@ bool SudokuCreationDialog::CustomDimensionsDialog()
     if (dim.y == -1)
         dim.y = 3;
 
-    gwxDualNumberEntryDialog dlg(this,0);
+    wxtk::DualNumberEntryDialog dlg(this,0);
     dlg.SetMessage(wxT("Please specify the dimensions for the sudoku.\nNumber of blocks:"));
     dlg.SetPrompt0(wxT("Columns:"));
-    dlg.SetNumber0(gwxSpinInfo(dim.x, 1, 10));
+    dlg.SetNumber0(wxtk::SpinInfo(dim.x, 1, 10));
     dlg.SetPrompt1(wxT("Rows:"));
-    dlg.SetNumber1(gwxSpinInfo(dim.y, 1, 10));
+    dlg.SetNumber1(wxtk::SpinInfo(dim.y, 1, 10));
 
     if (dlg.ShowModal() != wxID_OK)
         return false;

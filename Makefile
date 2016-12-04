@@ -2,7 +2,7 @@
 #
 
 BIN = wxSudokuSolver
-OBJ = description_txt.o html_templates.o sudApp.o sudEditor.o sudFrame.o sudGen.o sudgendata.o sudgrid.o sudokucreationdialog.o SudokuSave.o sudSolve.o waitdialog.o wxprec.o
+OBJ = description_txt.o html_templates.o sudApp.o sudEditor.o sudFrame.o sudGen.o sudgendata.o sudgrid.o sudokucreationdialog.o SudokuSave.o sudSolve.o waitdialog.o wxprec.o wxtk/aboutbox.o wxtk/validators.o wxtk/dualnumberentrydialog.o
 
 CC = g++
 OUT_DIR = release
@@ -30,7 +30,7 @@ clean:
 	`test !(-d $(OUT_DIR))` || `rmdir $(OUT_DIR)`
 
 prepare:
-	`test -d $(OUT_DIR)` || `mkdir $(OUT_DIR)`
+	mkdir -p $(OUT_DIR)/wxtk
 
 
 # Build rules:

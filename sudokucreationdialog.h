@@ -149,12 +149,12 @@ class sudRadioDeliverer : public wxtk::IndexCheckDeliverer<wxSize>{
 public:
     sudRadioDeliverer(ValueType *selectval,const ValueType&persval,
                     IndexType *selectidx,const IndexType&persidx)
-        : wxtk::IndexCheckDeliverer(selectval,persval,selectidx,persidx)
+        : wxtk::IndexCheckDeliverer<wxSize>(selectval,persval,selectidx,persidx)
     {
     }
 
     sudRadioDeliverer(const sudRadioDeliverer& val)
-        : wxtk::IndexCheckDeliverer(val)
+        : wxtk::IndexCheckDeliverer<wxSize>(val)
     {
     }
 

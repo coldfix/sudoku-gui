@@ -1,6 +1,6 @@
 #include <wx/wxprec.h>
 
-#include "sudokusave.h"
+#include "SudokuSave.h"
 
 #include <wx/stream.h>      // wxOutputStream
 #include <wx/wfstream.h>    // wxFileOutputStream

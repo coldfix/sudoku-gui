@@ -221,9 +221,10 @@ template<class T,class I=int>
 class IndexCheckDeliverer : public ValueCheckDeliverer<T>{
 public:
     typedef I IndexType;
+    using typename ValueCheckDeliverer<T>::ValueType;
 
     IndexCheckDeliverer(ValueType* selectval,ValueType persval,IndexType* selectidx,IndexType persidx)
-        : ValueCheckDeliverer(selectval,persval), m_selectedIndex(selectidx), m_personalIndex(persidx)
+        : ValueCheckDeliverer<T>(selectval,persval), m_selectedIndex(selectidx), m_personalIndex(persidx)
     {
     }
 
@@ -231,8 +232,8 @@ public:
         return *GetSelectedIndex()==GetPersonalIndex(); }
     bool SetSelected(bool buttonstate){
         if(buttonstate){
-            *GetSelectedValue() = GetPersonalValue();
-            *GetSelectedIndex() = GetPersonalIndex(); }
+            *this->GetSelectedValue() = this->GetPersonalValue();
+            *this->GetSelectedIndex() = this->GetPersonalIndex(); }
         return true; }
 
     IndexType* GetSelectedIndex()               { return m_selectedIndex; }
@@ -247,16 +248,17 @@ protected:
 template<class T>
 class FlagCheckDeliverer : public ValueCheckDeliverer<T>{
 public:
+    using typename ValueCheckDeliverer<T>::ValueType;
     FlagCheckDeliverer(ValueType* selectval,ValueType persval,ValueType mask)
-        : ValueCheckDeliverer(selectval,persval), m_mask(mask)
+        : ValueCheckDeliverer<T>(selectval,persval), m_mask(mask)
     {
     }
 
     bool GetSelected(){
-        return (*GetSelectedValue()&GetMask())==GetPersonalValue(); }
+        return (*this->GetSelectedValue()&GetMask())==this->GetPersonalValue(); }
     bool SetSelected(bool buttonstate){
         if(buttonstate)
-            *GetSelectedValue() = (*GetSelectedValue()&~GetMask()) | GetPersonalValue();
+            *this->GetSelectedValue() = (*this->GetSelectedValue()&~GetMask()) | this->GetPersonalValue();
         return true; }
 
     const ValueType& GetMask()          { return m_mask; }

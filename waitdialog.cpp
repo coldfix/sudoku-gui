@@ -31,7 +31,7 @@
 
 #include "waitdialog.h"
 
-#include "sudgen.h"
+#include "sudGen.h"
 
 ////@begin XPM images
 ////@end XPM images

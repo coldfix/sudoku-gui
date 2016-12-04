@@ -33,7 +33,7 @@
 #include "sudFrame.h"
 #include "sudEditor.h"
 #include "sudGen.h"
-#include "sudokusave.h"
+#include "SudokuSave.h"
 
 #include "wxtk/aboutbox.h"
 #include "sudokucreationdialog.h"
@@ -555,9 +555,9 @@ void sudFrame::OnStatusbar1Update(wxUpdateUIEvent& event)
 
     else
     {
-        char* txts[] = {wxT("Low difficulty"),
-                        wxT("Medium difficulty"),
-                        wxT("Hard")};
+        wxChar* txts[] = {wxT("Low difficulty"),
+                          wxT("Medium difficulty"),
+                          wxT("Hard")};
 
         text = txts[solver->difficulty()];
     }

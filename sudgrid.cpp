@@ -29,7 +29,7 @@
 ////@begin includes
 ////@end includes
 
-#include "sudGrid.h"
+#include "sudgrid.h"
 #include "sudEditor.h"
 
 ////@begin XPM images
